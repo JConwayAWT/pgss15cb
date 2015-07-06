@@ -4,7 +4,7 @@ This file gives a class that defines an arbitrary reagent
 
 class Reagent(super):
 
-    def __init__(count, full_name, abb_name):
+    def __init__(self, count, full_name, abb_name):
         """Initializes Reagent class
 
         count:     number of Reagent components
