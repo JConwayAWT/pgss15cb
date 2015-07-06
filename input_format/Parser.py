@@ -7,6 +7,7 @@ class Parser(super):
 
         f: input .react file name
         """
+        data = [states, reactions, output_freq, num_iterations]
         reaction_file = open(f, "r")
         for line in reaction_file:
             if line.startswith("#"):
@@ -14,7 +15,9 @@ class Parser(super):
             elif line.startswith("["):
                 section_title = line
             elif section_title == "[Iterations]":
-                int(line.strip())
+                num_iterations = int(line.strip())
+            elif section_title == "[Reagents]":
+
 
 
 
