@@ -15,11 +15,18 @@ class Reaction(super):
         self.state_ref = state_ref
         self.react_form_data = react_form_data
 
-    def propensity_update(self):
+    def get_propensity(self):
 
         raise NotImplementedError
 
     def reaction_update(self):
+        """Performs update given internal react_form_data
 
-        raise NotImplementedError
+        Edits state
+        """
+
+        for reagent, delta in self.react_form_data:
+            self.state_ref[reagent] += delta
+
+
 
