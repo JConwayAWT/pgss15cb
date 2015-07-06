@@ -2,17 +2,17 @@
 #   Number of iterations
     1000
 [Reagents]
-#   'Name':Number
-    'Apples':200
-    'Berries':400
-    'Cherries':10
+#   Name:Number
+    Apples:200
+    Berries:400
+    Cherries:10
 [Reactions]
-#   (coeff 1)'Name 1' + (coeff 2)'Name 2' -> (coeff 3)'Name 3' | k
-    2'Apples' + 3'Berries' -> 4'Cherries' | .12
+#   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
+    2Apples + 3Berries -> 4Cherries | .12
 [Output_Reagents]
-#   'Name 1'
-    'Apples'
-    'Berries'
+#   Name 1
+    Apples
+    Berries
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10
