@@ -1,7 +1,7 @@
 [Iterations]
 #   Number of iterations
     1000
-[Molecules]
+[Reagents]
 #   'Abbreviated Name':'Full Name':Number
     'A':'Apples':200
 [Reactions]
