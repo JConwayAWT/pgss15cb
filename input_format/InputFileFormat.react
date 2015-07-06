@@ -1,0 +1,16 @@
+[Iterations]
+#   Number of iterations
+    1000
+[Molecules]
+#   'Abbreviated Name':'Full Name':Number
+    'A':'Apples':200
+[Reactions]
+#   (coeff 1)'Abb Name 1' + (coeff 2)'Abb Name 2' -> (coeff 3)'Abb Name 3' | k
+    2'A' + 3'B' -> 4'C' | .12
+[Output_Molecules]
+#   'Abb Name 1'
+    'A'
+    'B'
+[Output_Frequency]
+#   (int) Logging frequency in iterations
+    10
