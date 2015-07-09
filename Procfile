@@ -1,0 +1,1 @@
+web: gunicorn pgss15compbio.wsgi --log-file -
