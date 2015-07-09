@@ -2,6 +2,7 @@
 This file gives a class that defines a reaction object
 """
 
+
 class Reaction(super):
 
     def __init__(self, state_ref, react_form_data, k):
@@ -24,9 +25,5 @@ class Reaction(super):
 
         Edits state
         """
-
         for reagent, delta in self.react_form_data:
             self.state_ref[reagent] += delta
-
-
-
