@@ -14,44 +14,78 @@ class Parser(object):
         reaction_file = open(f, "r")
         output_reagents = []
         for line in reaction_file:
-            if line.strip() == "":
-                continue
-            elif line.startswith("#"):
+            line = line.strip()
+            if line.startswith("#") or line == "":
                 continue
             elif line.startswith("["):
                 section_title = line
             elif '[Iterations' in section_title:
-                num_iterations = int(line.strip())
+                num_iterations = int(float(line.strip()))
+                if num_iterations <= 0:
+                    raise ValueError("Number of iterations must be positive")
             elif '[Reagents' in section_title:
                 name, count = line.split(':')
                 name = name.strip()
                 count = int(count.strip())
+                if count < 0:
+                    raise ValueError("Count can't be negative: " + line)
                 states[name] = Reagent(count, name)
             elif '[Reactions' in section_title:
                 reaction, k = line.split("|")
                 k = float(k)
                 reactant_str, product_str = reaction.split("->")
+                reactants = []
+                products = []
                 if "$" not in reactant_str:
-                    reactants = [reactant.strip()
-                                 for reactant in reactant_str.split("+")]
-                    reactants = [(reactant[1:], -int(reactant[0]))
-                                  for reactant in reactants]
-                else:
-                    reactants = []
+                    for reactant in reactant_str.split("+"):
+                        reactant = reactant.strip()
+                        for i in xrange(len(reactant)):
+                            if reactant[i].isalpha():
+                                coeff = -int(float(reactant[:i]))
+                                if coeff >= 0: 
+                                    raise ValueError(
+                                        "Coefficient must be positive: " + \
+                                                                        line)
+                                reactants.append((reactant[i:], coeff))
+                                break
                 if "$" not in product_str:
-                    products = [product.strip()
-                                for product in product_str.split("+")]
-                    products = [(product[1:], int(product[0]))
-                                  for product in products]
-                else:
-                    products = []
+                    for product in product_str.split("+"):
+                        product = product.strip()
+                        for i in xrange(len(product)):
+                            if product[i].isalpha():
+                                coeff = int(float(product[:i]))
+                                if coeff <= 0:
+                                    raise ValueError(
+                                        "Coefficient must be positive: " + \
+                                                                        line)
+                                products.append((product[i:], coeff))
+                                break
                 reactions.append(Reaction(states, reactants + products, k))
             elif '[Output_Reagents' in section_title:
                 output_reagents.append(line.strip())
             elif "[Output_Frequency" in section_title:
-                output_frequency = int(line.strip())
+                output_frequency = int(float(line.strip()))
+                if output_frequency <= 0:
+                    raise ValueError("Output frequency must be positive")
+            elif "[RNG_Seed" in section_title:
+                rng_seed = line.strip()
+                if rng_seed != "r":
+                    rng_seed = int(float(rng_seed))
+                    if rng_seed <= 0:
+                        raise ValueError("RNG seed must be positive")
+                else:
+                    rng_seed = -1
             else:
                 raise ValueError("Bad File")
+        for reaction in reactions:
+            for reagent in reaction.react_form_data:
+                if reagent[0] not in states:
+                    raise ValueError("Reagent {} not defined".format(
+                                     reagent[0]))
+        for reagent in output_reagents:
+            if reagent not in states:
+               raise ValueError("Ouput Reagent {} not defined".format(
+                                reagent)) 
         print states
         print states['Berries'].__dict__
         print reactions[0].__dict__
@@ -59,6 +93,7 @@ class Parser(object):
         print num_iterations
         print output_frequency
         print output_reagents
+        print rng_seed
 
 
 

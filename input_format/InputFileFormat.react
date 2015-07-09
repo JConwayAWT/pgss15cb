@@ -20,8 +20,6 @@
     Apples
     Berries
     # NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
-    # OUTPUT FILE NAME FLAG
-    # SEED FOR RANDOM NUMBER GENERATOR
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10
