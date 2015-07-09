@@ -3,19 +3,29 @@
     1000
 [Reagents]
 #   Name:Number
+#   Only input integer values as values
     Apples:200
     Berries:400
     Cherries:10
+    Oranges:100
+    Grapes:12
 [Reactions]
 #   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
-#   if nothing created or used in reaction, then use $ sign
+#   If nothing created or used in reaction, then use $ sign
+#   Only input integer values as coefficients
     2Oranges + 3Grapes -> $ | .14
-    2Apples + 3Berries -> 4Cherries | .12
+    20.0Apples + 3Berries -> 4Cherries | .12
 [Output_Reagents]
 #   Name 1
     Apples
     Berries
-
+    # NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
+    # OUTPUT FILE NAME FLAG
+    # SEED FOR RANDOM NUMBER GENERATOR
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10
+[RNG_Seed]
+#   (int) Random seed
+#   use r character for random seed
+    1000
