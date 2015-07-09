@@ -28,7 +28,9 @@ class Parser(super):
                 states[name] = Reagent(count, name)
             elif 'Reactions' in section_title:
                 reaction, k = line.split("|")
-                reaction.strip()
+                reactant_str, product_str = reaction.split("->")
+
+
             elif 'Output_Reagents' in section_title:
                 output_reagents.append(line.strip())
             elif "Output_Frequency" in section_title:
