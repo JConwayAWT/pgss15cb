@@ -2,7 +2,7 @@
 This file gives a class that defines an arbitrary reagent
 """
 
-class Reagent(super):
+class Reagent(object):
 
     def __init__(self, count, name):
         """Initializes Reagent class

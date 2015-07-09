@@ -1,6 +1,6 @@
 """Defines model class"""
 
-class Model(super):
+class Model(object):
 
     def __init__(self, states, reactions, output_freq, output_reagents,
                                                          num_iterations):

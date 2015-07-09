@@ -3,7 +3,7 @@ This file gives a class that defines a reaction object
 """
 
 
-class Reaction(super):
+class Reaction(object):
 
     def __init__(self, state_ref, react_form_data, k):
         """Initializes reaction class
