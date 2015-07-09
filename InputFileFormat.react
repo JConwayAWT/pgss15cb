@@ -1,0 +1,21 @@
+[Iterations]
+#   Number of iterations
+    1000
+[Reagents]
+#   Name:Number
+    Apples:200
+    Berries:400
+    Cherries:10
+[Reactions]
+#   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
+#   if nothing created or used in reaction, then use $ sign
+    2Oranges + 3Grapes -> $ | .14
+    2Apples + 3Berries -> 4Cherries | .12
+[Output_Reagents]
+#   Name 1
+    Apples
+    Berries
+
+[Output_Frequency]
+#   (int) Logging frequency in iterations
+    10
