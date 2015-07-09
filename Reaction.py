@@ -18,14 +18,16 @@ class Reaction(object):
         self.k = k
 
     def get_propensity(self):
+
         prop = 1
         for reagent, delta in self.react_form_data:
-            prop *= self.state_ref[reagent]
+            prop *= self.state_ref[reagent].count
         return prop * self.k
+
     def reaction_update(self):
         """Performs update given internal react_form_data
 
         Edits state
         """
         for reagent, delta in self.react_form_data:
-            self.state_ref[reagent] += delta
+            self.state_ref[reagent].count += delta

@@ -25,8 +25,10 @@ while time < Model.num_iterations:
     while r1 == 0:
         r1 = rng.rand()
     r2 = rng.rand()
+    print "sumPropr"
+    print sumProp
     if sumProp != 0:
-        t = (1/(sumProp*1.0))*math.log(1/(r1*1.0))
+        t = (1/(sumProp*1.0))*math.log(1/(r1*1.0)) * 10^500
     else:
         print "Invalid propensity sum."
         break
