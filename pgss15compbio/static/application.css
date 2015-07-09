@@ -1,7 +1,72 @@
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
 .hello-world{
-  font-size: 35px;
+	font-size: 35px;
 }
 
 body{
-  background-color: whitesmoke;
+	background-color: whitesmoke;
+}
+
+#b{
+	font-size: 20px;
+	text-align: center;
+}
+
+.jumbotron {
+	/*background-image: url(https://c1.staticflickr.com/3/2883/11344901275_be392a33c5_z.jpg);*/
+	background-position: left;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.jTextTop {
+	padding-top: 20px;
+}
+
+
+.navbar {
+	padding: 0px;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+
+.circular {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	background: url(https://c1.staticflickr.com/3/2883/11344901275_be392a33c5_z.jpg) no-repeat;
+}
+
+.marketing .col-lg-4 {
+	margin-bottom: 20px;
+	text-align: center;
+}
+.marketing h2 {
+	font-weight: normal;
+}
+.marketing .col-lg-4 p {
+	margin-right: 10px;
+	margin-left: 10px;
 }
