@@ -1,3 +1,15 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
+from datetime import datetime
+from django.core.exceptions import ValidationError
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_init
 
-# Create your models here.
+class DemoObject(models.Model):
+  object_name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Name")
+  object_description = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Description")
+  object_number = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Number")
+
+  def __unicode__(self):
+    return "{}".format(self.object_name or self.object_description or "N/A")
