@@ -3,15 +3,13 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 
 def index(request):
-  context = RequestContext(request)
-  #template = loader.get_template('skeletonpages/index.html')
-  #return HttpResponse(template.render(context))
-  return render_to_response('skeletonpages/index.html', RequestContext(request))
+  context = {'active_tab': '#index'}
+  return render_to_response('skeletonpages/index.html', context, RequestContext(request))
 
 def input(request):
-	context = RequestContext(request)
-	return render_to_response('skeletonpages/input.html', RequestContext(request))
+	context = {'active_tab': '#input-nav'}
+	return render_to_response('skeletonpages/input.html', context, RequestContext(request))
 
 def output(request):
-  context = RequestContext(request)
-  return render_to_response('skeletonpages/output.html', RequestContext(request))
+  context = {'active_tab': '#output-nav'}
+  return render_to_response('skeletonpages/output.html', context, RequestContext(request))

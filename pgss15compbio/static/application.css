@@ -31,6 +31,10 @@ body{
 	padding: 0px;
 }
 
+#full-content{
+	margin-top: 50px;
+}
+
 .btn-file {
 	position: relative;
 	overflow: hidden;
