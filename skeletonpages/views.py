@@ -12,4 +12,6 @@ def input(request):
 	context = RequestContext(request)
 	return render_to_response('skeletonpages/input.html', RequestContext(request))
 
-# Create your views here.
+def output(request):
+  context = RequestContext(request)
+  return render_to_response('skeletonpages/output.html', RequestContext(request))
