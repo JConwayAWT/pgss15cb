@@ -8,4 +8,8 @@ def index(request):
   #return HttpResponse(template.render(context))
   return render_to_response('skeletonpages/index.html', RequestContext(request))
 
+def input(request):
+	context = RequestContext(request)
+	return render_to_response('skeletonpages/input.html', RequestContext(request))
+
 # Create your views here.
