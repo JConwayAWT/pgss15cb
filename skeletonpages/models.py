@@ -13,3 +13,20 @@ class DemoObject(models.Model):
 
   def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
+
+class UserProfile(models.Model):
+  user = models.OneToOneField(User)
+
+  organization = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Organization Name")
+  scientific_field = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Field")
+
+  def __unicode__(self):
+      return "Profile information for {}".format(self.user.email)
+
+  class Meta:
+      verbose_name = "Profile"
+      verbose_name_plural = "Profiles"
+
+  def create_user_profile(sender, instance, created, **kwargs):
+      if created:
+          UserProfile.objects.create(user=instance)
