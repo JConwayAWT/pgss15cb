@@ -2,6 +2,8 @@
 This file gives a class that defines a reaction object
 """
 
+from math import factorial
+
 
 class Reaction(object):
 
@@ -21,7 +23,9 @@ class Reaction(object):
 
         prop = 1
         for reagent, delta in self.react_form_data:
-            prop *= self.state_ref[reagent].count
+            if delta < 0:
+                prop *= factorial(int(self.state_ref[reagent].count)) \
+                        / factorial(int(self.state_ref[reagent].count + delta)) / abs(delta)
         return prop * self.k
 
     def reaction_update(self):

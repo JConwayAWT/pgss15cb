@@ -34,37 +34,34 @@ class Model(object):
             fileWriter = csv.writer(dataFile, delimiter = ',')
             fileWriter.writerow(["Time"] + reagentNames)
             
-
-        while time < self.num_iterations:
-            sumProp = 0
-            propen = []
-            for p in self.reactions:
-                propen.append(p.get_propensity())
-                sumProp += p.get_propensity()
-            #print time, propen
-            r1 = rng.random()
-            while r1 == 0:
+            while time < self.num_iterations:
+                sumProp = 0
+                propen = []
+                for p in self.reactions:
+                    propen.append(p.get_propensity())
+                    sumProp += p.get_propensity()
+                #print time, propen
                 r1 = rng.random()
-            r2 = rng.random()
-            if sumProp != 0:
-                #print sumProp
-                t = (1/(sumProp*1.0))*math.log(1/(r1*1.0))
-            else:
-                print "Invalid propensity sum."
-                break
-            time += t
-            subsum = 0
-            nextReact = -1
-            thres = r2 * sumProp
-            for n in propen:
-                nextReact+=1
-                subsum += n
-                if subsum >= thres:
+                while r1 == 0:
+                    r1 = rng.random()
+                r2 = rng.random()
+                if sumProp != 0:
+                    #print sumProp
+                    t = (1/(float(sumProp)))*math.log(1/(r1*1.0)) * 500
+                else:
+                    print "Invalid propensity sum."
                     break
-            self.reactions[nextReact].reaction_update()
+                time += t
+                subsum = 0
+                nextReact = -1
+                thres = r2 * sumProp
+                for n in propen:
+                    nextReact+=1
+                    subsum += n
+                    if subsum >= thres:
+                        break
+                self.reactions[nextReact].reaction_update()
 
-            with open("data.csv", "w+") as dataFile:
-                fileWriter = csv.writer(dataFile, delimiter = ',')
                 reagentCounts = []
                 for r in reagents:
                     reagentCounts.append(r.count)

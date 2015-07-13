@@ -4,22 +4,19 @@
 [Reagents]
 #   Name:Number
 #   Only input integer values as values
-    Apples:2000
-    Berries:10000
-    Cherries:1000
-    Oranges:100000
-    Grapes:1200
+    R:1000
+    W:2000
 [Reactions]
 #   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
 #   If nothing created or used in reaction, then use $ sign
 #   Only input integer values as coefficients
-    2Oranges + 3Grapes -> $ | .14
-    2Apples + 3Berries -> 4Cherries | .12
+    1R -> 2R | 10
+    1R + 1W -> 2W | 0.01
+    1W -> $ | 10
 [Output_Reagents]
 #   Name 1
-    Apples
-    Berries
-    # NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
+    R
+    W
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10
