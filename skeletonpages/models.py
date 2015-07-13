@@ -5,6 +5,8 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_init
+from django.utils.translation import ugettext as _
+from userena.models import UserenaBaseProfile
 
 class DemoObject(models.Model):
   object_name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Name")
@@ -14,7 +16,7 @@ class DemoObject(models.Model):
   def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
-class UserProfile(models.Model):
+class UserProfile(UserenaBaseProfile):
   user = models.OneToOneField(User)
 
   organization = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Organization Name")
