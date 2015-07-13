@@ -27,7 +27,7 @@ class Parser(object):
             elif '[Reagents' in section_title:
                 name, count = line.split(':')
                 name = name.strip()
-                count = int(count.strip())
+                count = int(float(count.strip()))
                 if count < 0:
                     raise ValueError("Count can't be negative: " + line)
                 states[name] = Reagent(count, name)
