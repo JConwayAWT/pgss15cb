@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^skeletonpages/', include('skeletonpages.urls')),
+    url(r'^accounts/', include('userena.urls')),
     # 'django.views.static.serve',
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
