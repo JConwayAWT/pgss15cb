@@ -34,7 +34,9 @@ class Model(object):
             fileWriter = csv.writer(dataFile, delimiter = ',')
             fileWriter.writerow(["Time"] + reagentNames)
             
+            i = 0
             while time < self.num_iterations:
+                i += 1
                 sumProp = 0
                 propen = []
                 for p in self.reactions:
@@ -61,9 +63,9 @@ class Model(object):
                     if subsum >= thres:
                         break
                 self.reactions[nextReact].reaction_update()
-
                 reagentCounts = []
                 for r in reagents:
                     reagentCounts.append(r.count)
                 fileWriter.writerow([time] + reagentCounts)
-                print [time] + reagentCounts
+                if i % 10 == 0:
+                    print [time] + reagentCounts

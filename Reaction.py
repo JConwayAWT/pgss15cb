@@ -24,8 +24,9 @@ class Reaction(object):
         prop = 1
         for reagent, delta in self.react_form_data:
             if delta < 0:
-                prop *= factorial(int(self.state_ref[reagent].count)) \
-                        / factorial(int(self.state_ref[reagent].count + delta)) / abs(delta)
+                for i in xrange(abs(delta)):
+                    prop *= self.state_ref[reagent].count - i
+                prop = prop / abs(delta)
         return prop * self.k
 
     def reaction_update(self):
