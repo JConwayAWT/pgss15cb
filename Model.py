@@ -62,10 +62,11 @@ class Model(object):
                     subsum += n
                     if subsum >= thres:
                         break
-                self.reactions[nextReact].reaction_update()
-                reagentCounts = []
-                for r in reagents:
-                    reagentCounts.append(r.count)
-                fileWriter.writerow([time] + reagentCounts)
+                if i % 100 == 0:
+                    self.reactions[nextReact].reaction_update()
+                    reagentCounts = []
+                    for r in reagents:
+                        reagentCounts.append(r.count)
+                    fileWriter.writerow([time] + reagentCounts)
                 if i % 1000 == 0:
                     print [time] + reagentCounts

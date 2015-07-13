@@ -1,6 +1,6 @@
 [Iterations]
 #   Number of iterations
-    100000
+    10000
 [Reagents]
 #   Name:Number
 #   Only input integer values as values
