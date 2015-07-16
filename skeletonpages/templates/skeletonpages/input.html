@@ -1,34 +1,90 @@
 {% include 'common/_header.html' %}
 
-<div class="row" align="center">
-  <h1>Input File</h1>
+<div class="row" align= "center">
+  <h1 id="title">Upload file</h1>
 
-  <p>Instructions go here? Or do we want carousel</p>
+  <p></p>
 
   <div class="col-lg-12">
     <div class="col-lg-4 col-lg-offset-4">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Upload File...">
-        <span class="input-group-btn">
-          <button class="btn btn-default btn-file" type="file">Browse</button>
-        </span>
-      </div><!-- /input-group -->
+      <div class="form-group">
+        <label for="exampleInputFile">Upload .react here</label>
+        <input type="file" id="exampleInputFile">
+      </div>
     </div><!-- /.col-lg-6 -->
   </div>
 
   <div class="row">
-    OR
+    <hr>
+    <h1>Input data manually</h1>
+
   </div>
 
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Number of Iterations" aria-describedby="basic-addon1">
-  </div>
+  <div class="row">
+    <h4>Molecule name</h>
+    </div>
 
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Reagants" aria-describedby="basic-addon1">
-  </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
 
+          <input type="text" class="form-control" id="molecule" placeholder="Molecule Name" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+          <input type="number" class="form-control" id="intiConcen" placeholder="Initial Concentration" aria-describedby="basic-addon1">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" id="addData">Add Data</button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <ul class="list-group">
+          <li class="list-group-item" id="moleculeList">Click add add to see your molecules appear here</li>
+          <li class="list-group-item" id="concentrations">Concentrations appear here</li>
+        </div>
+      </ul>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
 
 </div>
+
+<script>
+  var count = 0;
+  $("#addData").click(function(){
+
+  alert("chris got no game");
+    if (count === 0)
+    {
+      var text = $("#molecule").val();
+      $("#moleculeList").text(text);
+
+      var initconcen = $("#initConcen").val();
+      initconcen = text.substring(0,3) + "-" + initconcen;
+      $("#concentrations").text(initconcen);
+
+
+      count ++;
+    }
+    else
+    {
+      var text = $("#moleculeList").text();   //variable gets text inside of mol. list
+      var newText = $("#molecule").val();   //variable gets value of inputted concentration
+      newText = newText.substring(0,3);       //cuts newText to only first 3 letters
+      text = text + ", " + $("#molecule").val(); //creates total text value for mol. list
+      $("#moleculeList").text(text);
+
+      var initconcen = $("#concentrations").text();
+      initconcen = initconcen + ", " + newText + "-" + $("#initConcen").val();
+      $("#concentrations").text(initconcen);
+
+
+    }
+  });
+</script>
 
 {% include 'common/_footer.html' %}
