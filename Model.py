@@ -13,7 +13,7 @@ class Model(object):
         self.num_iterations  = num_iterations  # Number of iterations to run
         self.output_reagents = output_reagents  # Which reagents to output
         self.seed = seed
-        self.outFile = outFile
+        self.outFile = outFile  #string of output file (ants.csv)
 
     def iterate(self):
 
