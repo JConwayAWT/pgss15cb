@@ -1,3 +1,9 @@
+
+
+
+#updated version, using better data structure
+
+
 import os
 from lottka_volterra_sim import *
 
@@ -23,7 +29,7 @@ def check_for_negatives(list_molecule_numbers, result_object):
     for number in list_molecule_numbers:
         if number < 0:
             result_object.result = False
-            result_object.status = "FAIL: Test failed at iteration {} in output {}.".format(counter, list_molecule_numbers)
+            result_object.status = "FAIL: Test failed at iteration {} in output {}.".format(counter, list_molecule_numbers) 
         else:
             result_object.result = True
             result_object.status = "PASS / "
