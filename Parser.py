@@ -5,7 +5,7 @@ from Reaction import Reaction
 from Model import Model
 class Parser(object):
 
-    def get_model(self, f):
+    def get_model(self, f, outFile):
         """Returns a model for a given input file
 
         f: input .react file name
@@ -95,7 +95,7 @@ class Parser(object):
                                 reagent))
         print "laskdj"
         return Model(states, reactions, output_frequency, output_reagents,
-                                            num_iterations, rng_seed)
+                                            num_iterations, rng_seed, outFile)
 
 
 
