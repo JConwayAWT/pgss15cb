@@ -11,11 +11,13 @@ class Parser(object):
         f: input .react file name
         """
         states = {}
+        section_title=""
         reactions = []
         reaction_file = open(f, "r")
         output_reagents = []
         for line in reaction_file:
-            line = line.strip()
+            line = line.rstrip()
+            print line
             if line.startswith("#") or line == "":
                 continue
             elif line.startswith("["):
@@ -40,6 +42,8 @@ class Parser(object):
                 if "$" not in reactant_str:
                     for reactant in reactant_str.split("+"):
                         reactant = reactant.strip()
+                        if reactant[0].isalpha():
+                            reactant = "1" + reactant
                         for i in xrange(len(reactant)):
                             if reactant[i].isalpha():
                                 coeff = -int(float(reactant[:i]))
@@ -52,6 +56,8 @@ class Parser(object):
                 if "$" not in product_str:
                     for product in product_str.split("+"):
                         product = product.strip()
+                        if product[0].isalpha():
+                            product = "1" + product
                         for i in xrange(len(product)):
                             if product[i].isalpha():
                                 coeff = int(float(product[:i]))
@@ -87,6 +93,7 @@ class Parser(object):
             if reagent not in states:
                raise ValueError("Ouput Reagent {} not defined".format(
                                 reagent))
+        print "laskdj"
         return Model(states, reactions, output_frequency, output_reagents,
                                             num_iterations, rng_seed)
 

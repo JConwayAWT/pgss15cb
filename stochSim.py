@@ -2,7 +2,9 @@
 """Main function"""
 
 from Parser import Parser
+import sys
 
 p = Parser()
-model = p.get_model("./MTK.react")
+print sys.argv
+model = p.get_model(sys.argv[1])
 model.iterate()

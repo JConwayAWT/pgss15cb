@@ -16,10 +16,11 @@ class Model(object):
 
     def iterate(self):
 
+
         seed = self.seed
         while seed < 0:
             seed = rng.random() * 10000
-        rng.seed(9079876)
+        rng.seed(seed)
         
         time = 0
         reagentNames = []
@@ -31,11 +32,13 @@ class Model(object):
             reagents.append(reags)
 
         with open("data.csv", "w+") as dataFile:
+
             fileWriter = csv.writer(dataFile, delimiter = ',')
             fileWriter.writerow(["Time"] + reagentNames)
             
             i = 0
             while time < self.num_iterations:
+
                 i += 1
                 sumProp = 0
                 propen = []
@@ -49,7 +52,7 @@ class Model(object):
                 r2 = rng.random()
                 if sumProp != 0:
                     #print sumProp
-                    t = (1/(float(sumProp)))*math.log(1/(r1*1.0)) * 500
+                    t = (1/(float(sumProp)))*math.log(1/(r1*1.0)) * 1
                 else:
                     print "Invalid propensity sum."
                     break
