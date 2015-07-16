@@ -8,6 +8,9 @@ class Model(object):
     def __init__(self, states, reactions, output_freq, output_reagents,
                                             num_iterations, seed, outFile):
         self.states          = states  # [('A',Reagent object of A)]
+        # for state in states:
+        #   self.states.append(state)
+        #  
         self.reactions       = reactions  # list of Reaction objects
         self.output_freq     = output_freq  # How often to log to file
         self.num_iterations  = num_iterations  # Number of iterations to run

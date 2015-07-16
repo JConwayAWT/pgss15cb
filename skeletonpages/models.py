@@ -13,14 +13,25 @@ class DemoObject(models.Model):
   object_description = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Description")
   object_number = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Number")
 
-    def __unicode__(self):
+  def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
 class Reagent(models.Model):
-    count = models.IntegerField(null = True, blank = True)
-    name = models.CharField(max_length = 200, null = True, blank = True, verbose_name = "Reagent Name")
+  count = models.IntegerField(null = True, blank = True)
+  name = models.CharField(max_length = 200, null = True, blank = True, verbose_name = "Reagent Name")
 
 class Parser(models.Model):
+  section_title = models.CharField(max_length = 200, null = True, blank = True, verbose_name = "section title")
+
+
+class Reaction(models.Model):
+  reagents = models.OneToManyField(Reagent, null = True, blank = True)
+
+class Model(models.Model):
+  output_freq = models.IntegerField(null = True, blank = True)
+  num_iterations = models.IntegerField(null = True, blank = True)
+  seed = models.IntegerField(null = True, blank = True)
+
     
 
 
