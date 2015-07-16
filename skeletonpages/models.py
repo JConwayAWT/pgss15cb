@@ -13,8 +13,18 @@ class DemoObject(models.Model):
   object_description = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Description")
   object_number = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Number")
 
-  def __unicode__(self):
+    def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
+
+class Reagent(models.Model):
+    count = models.IntegerField(null = True, blank = True)
+    name = models.CharField(max_length = 200, null = True, blank = True, verbose_name = "Reagent Name")
+
+class Parser(models.Model):
+    
+
+
+
 
 class UserProfile(UserenaBaseProfile):
   user = models.OneToOneField(User)
