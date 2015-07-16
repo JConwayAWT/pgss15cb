@@ -1,0 +1,54 @@
+[Iterations]
+#   Number of iterations
+    10000000
+[Reagents]
+#   Name:Number
+#   Only input integer values as values
+    
+    A: 1000
+    B: 450
+    AB: 0
+    ABB: 0
+    ABBB: 0
+
+
+
+[Reactions]
+#   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
+#   If nothing created or used in reaction, then use $ sign
+#   Only input integer values as coefficients
+#    2Oranges + 3Grapes -> $ | .14
+#    2Apples + 3Berries -> 4Cherries | .12
+
+    A + B -> AB | 0.0002438
+    AB -> A + B | 0.0006932
+    AB -> B | 0.000077388
+    AB -> A | 0.001211
+
+    AB + B -> ABB | 0.00000694257
+    ABB -> AB + B | 0.00000475385
+
+    ABB -> AB | 0.0000450353
+    ABB -> 2B | 0.000034073
+    ABB -> A + 2B | 0.00000638355
+    A + 2B -> ABB | 0.0000105249
+    ABB + B -> ABBB | 0.0000313041
+    ABBB -> ABB + B | 0.00040597
+    ABBB -> 3B | 0.0009040
+    ABBB -> AB + 2B | 0.00000122548
+    AB + 2B -> ABBB | 0.00000653508
+
+
+[Output_Reagents]
+#   Name 1
+	A
+	B
+
+# NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
+[Output_Frequency]
+#   (int) Logging frequency in iterations
+    10
+[RNG_Seed]
+#   (int) Random seed
+#   use r character for random seed
+    1000
