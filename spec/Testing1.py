@@ -1,3 +1,10 @@
+
+
+
+#see testing2 file
+
+
+
 import os
 from lottka_volterra_sim import *
 
