@@ -17,7 +17,7 @@ class Parser(object):
         output_reagents = []
         for line in reaction_file:
             line = line.rstrip()
-            print line
+            # print line
             if line.startswith("#") or line == "":
                 continue
             elif line.startswith("["):
@@ -93,7 +93,6 @@ class Parser(object):
             if reagent not in states:
                raise ValueError("Ouput Reagent {} not defined".format(
                                 reagent))
-        print "laskdj"
         return Model(states, reactions, output_frequency, output_reagents,
                                             num_iterations, rng_seed, outFile)
 
