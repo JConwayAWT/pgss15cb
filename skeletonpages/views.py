@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from skeletonpages.forms import AlgorithmRunForm
+from django.core.urlresolvers import reverse
 from skeletonpages.models import *
 
 def index(request):
