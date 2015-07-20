@@ -24,4 +24,4 @@ urlpatterns = [
     url(r'^skeletonpages/', include('skeletonpages.urls')),
     url(r'^accounts/', include('userena.urls')),
     # 'django.views.static.serve',
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
