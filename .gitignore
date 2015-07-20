@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+media/
+pgss15compbio/media
 
 # C extensions
 *.so
