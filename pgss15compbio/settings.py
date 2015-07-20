@@ -89,7 +89,7 @@ ROOT_URLCONF = 'pgss15compbio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', 'skeletonpages/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
