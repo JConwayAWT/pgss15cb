@@ -16,7 +16,6 @@ class DemoObject(models.Model):
   def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
-
 class UserProfile(UserenaBaseProfile):
   user = models.OneToOneField(User)
 
@@ -33,3 +32,10 @@ class UserProfile(UserenaBaseProfile):
   def create_user_profile(sender, instance, created, **kwargs):
       if created:
           UserProfile.objects.create(user=instance)
+
+
+class AlgorithmRun(models.Model):
+  user_profile = models.OneToOneField(UserProfile, null = True)
+  name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
+  description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
+  input_file = models.FileField(upload_to = "documents/%Y/%m/%d")
