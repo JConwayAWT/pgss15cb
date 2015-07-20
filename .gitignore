@@ -4,6 +4,10 @@ __pycache__/
 *$py.class
 media/
 pgss15compbio/media
+*.csv
+*.dat
+.idea/
+*.pyc
 
 # C extensions
 *.so
