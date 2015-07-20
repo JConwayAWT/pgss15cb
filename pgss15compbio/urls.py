@@ -21,7 +21,7 @@ from pgss15compbio import views
 
 
 urlpatterns = [
-    url(r'^', views.hello, name="hello"),
+    url(r'^$', views.hello, name="hello"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^skeletonpages/', include('skeletonpages.urls')),
     url(r'^accounts/', include('userena.urls')),
