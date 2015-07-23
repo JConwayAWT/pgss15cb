@@ -1,12 +1,70 @@
 {% include 'common/_header.html' %}
+<div class="row" align="center">
+	<button type="button" class="btn btn-default" id="downloadFile">Download .react File</button>
+</div>
+
 
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<canvas id="myChart" width="400" height="400"></canvas>
-		<script>
+	<div id="data" class="col-md-4 col-md-offset-1 pre-scrollable" align="center">
+	</div>
+
+	<div class="col-md-5 col-md-offset-1" align="center">
+		<canvas id="myChart" width="500" height="500"></canvas>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+		<script type="text/javascript"charset="utf-8">
+			var dt = [];
+            d3.text("http://vincentarelbundock.github.io/Rdatasets/csv/datasets/AirPassengers.csv", function(data)
+            	{
+	                var parsedCSV = d3.csv.parseRows(data);
+	                for (var i=1; i<parsedCSV.length; i++)
+	                {
+	                	dt.push([parsedCSV[i][1],parsedCSV[i][2]]);
+	                }
+
+	                var container = d3.select("div#data")
+	                    .append("table").classed('table table', true)
+
+	                    .selectAll("tr")
+	                        .data(parsedCSV).enter()
+	                        .append("tr")
+
+	                    .selectAll("td")
+	                        .data(function(d) { return d; }).enter()
+	                        .append("td")
+	                        .text(function(d) { return d; });
+            	}
+            );
+
+            function getX() {
+            	var a = [];
+            	for (var i=0; i<dt.length; i+=2)
+            	{
+            		a.push(dt[i][0]);
+            	}
+            	return a;
+            }
+
+            function getY() {
+            	var a = [];
+            	for (var i=1; i<dt.length; i+=2)
+            	{
+            		a.push(dt[i][1]);
+            	}
+            	return a;
+            }
+
 			// Get context with jQuery - using jQuery's .get() method.
 
 			// This will get the first returned node in the jQuery collection.
+			var firstLine = {
+				x: [1,2,3,4,5], //getX(),
+				//x: {{ simulation.x_values }}
+				y: [1,2,3,4,5], //getY(),
+				mode: "lines",
+				type: "scatter"
+			};
+
 			var data = {
 			    labels: ["January", "February", "March", "April", "May", "June", "July"],
 			    datasets: [
@@ -18,7 +76,7 @@
 			            pointStrokeColor: "#fff",
 			            pointHighlightFill: "#fff",
 			            pointHighlightStroke: "rgba(220,220,220,1)",
-			            data: [65, 59, 80, 81, 56, 55, 40]
+			            data: [65, 59, 80, 81, 56, 55, 40] //getData() 
 			        },
 			        {
 			            label: "My Second dataset",
@@ -34,10 +92,10 @@
 			};
 			var ctx = $("#myChart").get(0).getContext("2d");
 			var myLineChart = new Chart(ctx).Line(data);
+			//Plotly.plot("myChart", firstLine);
 		</script>
 
 	</div>
-	<button type="button" class="btn btn-default" id="downloadFile">Download .react File</button>
 	<script>
 	$("#downloadFile").click(function(){
 

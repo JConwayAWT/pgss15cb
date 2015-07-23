@@ -13,7 +13,7 @@
       </div>
     </div><!-- /.col-lg-6 -->
   </div>
-
+  
   <br><br>
 
   <div class="row">
@@ -67,35 +67,31 @@
           <button type="button" class="btn btn-default" id="add_reaction">Add Reaction</button>
         </div>
         
-        <div class="row col-lg-12">
-          <label>Output Frequency:</label>
-          <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+        <div>
+          <label class="row col-lg-12">Output Frequency:</label>
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+          </div>
         </div>
 
-        <div class="row">
+        <div class="row col-lg-12">
           <label>Random Seed:</label>
-          <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          </div>
         </div>
 
         <div id="incomplete_data" class="alert alert-danger" role="alert" style="display:none">
           You must enter have data for all fields.
         </div>
 
-        <div class="row">
+        
+
+        <div class="row col-lg-12">
           <button type="button" class="btn btn-default" id="run_sim">Run Simulation</button>
         </div>
 
-        <div class="row">
-          <ul class="list-group" id="listOfInputs">
-              
-              
-              
-          </ul>
-        </div>
-
-        <div class="row">
-          <a download="info.react" id="downloadlink">Download</a>
-        </div>
+        
 
       </div>
     </div>
@@ -257,14 +253,21 @@
 </script>
 
 <style>
-.row{
-  padding: 10px;
-}
-#body{
-  padding-top: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
+  label {
+    padding-top: 30px;
+    padding-right: 10px;
+    padding: left: 10px;
+  }
+  #dwnld{
+    font-size: 30px;
+  }
+  a:hover{
+    text-decoration: none;
+    cursor:pointer;
+  }
+  button{
+    padding-top: 25px;
+  }
 </style>
 
 {% include 'common/_footer.html' %}
