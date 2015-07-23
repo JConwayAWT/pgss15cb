@@ -21,43 +21,53 @@
 
   </div>
 
-  <div class="row">
+  <div class="row" id="body">
     <div class="col-lg-12" align="center">
       
-      <div class="input-group col-lg-3" align="center">
-        <div class="row">
+      <div class="bodyArea">
+        <div class="input-group col-lg-3" align="center">
           <label>Number of Iterations:</label>
           <input type="text" class="form-control" id="num_of_iterations" placeholder="Number of Iterations" aria-describedby="basic-addon1">
         </div>
 
-        <div class="row">
+        <div class="col-lg-6">
           <label>Reagents:</label>
           <input type="text" class="form-control" id="reagent" placeholder="Reagent Name" aria-describedby="basic-addon1">
           <input type="text" class="form-control" id="reagent_concen" placeholder="Reagent Concentration" aria-describedby="basic-addon1">
         </div>
-
+        <div class="col-lg-6">
+          <label>List of Reagent Names:</label>
+          <li class="list-group-item" id="reagentNamesList">List of Reagent Names</li>
+          <label>List of Reagent Concentrations:</label>
+          <li class="list-group-item" id="reagentConcenList">List of Reagent Concentrations</li>
+        </div>
         <div id="incomplete_reagent" class="alert alert-danger" role="alert" style="display:none">
           You must fill out both Reagent Name and Reagent Concentration.
         </div>
 
-        <div class="row">
+        <div class="row col-lg-12" align="center">
           <button type="button" class="btn btn-default" id="add_reagent">Add Reagent</button>
         </div>
 
-        <div class="row">
+        <div class="row col-lg-6">
           <label>Reactions:</label>
-          <input type="text" class="form-control" id="reaction" placeholder="Reaction Formula" aria-describedby="basic-addon1">
+          <input type="text" class="form-control" id="reaction" align="center" placeholder="Reaction Formula" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="col-lg-6">
+          <label>List of Reactions:</label>
+          <li class="list-group-item" id="reactionList">List of Reactions</li>
         </div>
 
         <div id="incomplete_reaction" class="alert alert-danger" role="alert" style="display:none">
           You must enter a Reaction Formula.
         </div>
 
-        <div class="row">
+        <div class="row col-lg-12">
           <button type="button" class="btn btn-default" id="add_reaction">Add Reaction</button>
         </div>
         
-        <div class="row">
+        <div class="row col-lg-12">
           <label>Output Frequency:</label>
           <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
         </div>
@@ -76,13 +86,10 @@
         </div>
 
         <div class="row">
-          <ul class="list-group">
-              <label>List of Reagent Names:</label>
-              <li class="list-group-item" id="reagentNamesList">List of Reagent Names</li>
-              <label>List of Reagent Concentrations:</label>
-              <li class="list-group-item" id="reagentConcenList">List of Reagent Concentrations</li>
-              <label>List of Reactions:</label>
-              <li class="list-group-item" id="reactionList">List of Reactions</li>
+          <ul class="list-group" id="listOfInputs">
+              
+              
+              
           </ul>
         </div>
 
@@ -213,37 +220,6 @@
 </script>
 
 
-
-
-<!--
-    <div class="row">
-      <div class="col-lg-6">
-        <label>Molecule Name:</label> 
-        <div class="input-group">
-
-          <input type="text" class="form-control" id="molecule" placeholder="Molecule Name" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-          <input type="number" class="form-control" id="initConcen" placeholder="Initial Concentration" aria-describedby="basic-addon1">
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" id="addData">Add Data</button>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <ul class="list-group">
-          <li class="list-group-item" id="moleculeList">Click add add to see your molecules appear here</li>
-          <li class="list-group-item" id="concentrations">Concentrations appear here</li>
-        </div>
-      </ul>
-    </div>
-  </div>
-
-</div>
--->
-
 <script>
   var count = 0;
   $("#addData").click(function(){
@@ -279,5 +255,16 @@
     }
   });
 </script>
+
+<style>
+.row{
+  padding: 10px;
+}
+#body{
+  padding-top: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+</style>
 
 {% include 'common/_footer.html' %}
