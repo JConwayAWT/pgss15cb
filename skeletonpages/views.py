@@ -31,6 +31,11 @@ def about_us(request):
   context = {'active_tab': '#about_us-nav'}
   return render_to_response('skeletonpages/about_us.html', context, RequestContext(request))
 
+def show_simulation(request, simulation_id):
+  simulation = AlgorithmRun.objects.get(pk = simulation_id)
+  context = {'simulation': simulation}
+  return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
+
 def file_test(request):
     # Handle file upload
     if request.method == 'POST':
