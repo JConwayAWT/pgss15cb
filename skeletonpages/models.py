@@ -38,4 +38,5 @@ class AlgorithmRun(models.Model):
   user_profile = models.OneToOneField(UserProfile, null = True)
   name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
   description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
-  input_file = models.FileField(upload_to = "documents/%Y/%m/%d")
+  input_file = models.FileField(upload_to = "documents/%Y/%m/%d", null = True, blank = True)
+  output_file = models.FileField(upload_to = "documents/output/%Y/%m/%d", null = True, blank = True)
