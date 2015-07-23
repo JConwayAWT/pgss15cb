@@ -13,7 +13,7 @@ class Parser(object):
         states = {}
         section_title=""
         reactions = []
-        reaction_file = open(f, "r")
+        reaction_file = f
         output_reagents = []
         for line in reaction_file:
             line = line.rstrip()
@@ -95,11 +95,6 @@ class Parser(object):
                                 reagent))
         return Model(states, reactions, output_frequency, output_reagents,
                                             num_iterations, rng_seed, outFile)
-
-
-
-if __name__ == "__main__":
-    print Parser().get_model("./InputFileFormat.react")
 
 
 

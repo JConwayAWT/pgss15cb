@@ -4,6 +4,12 @@ from django.template import RequestContext, loader
 from skeletonpages.forms import AlgorithmRunForm
 from django.core.urlresolvers import reverse
 from skeletonpages.models import *
+from Parser import Parser
+from django.core.files import File
+from time import time
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 
 def index(request):
   context = {'active_tab': '#index'}
@@ -30,11 +36,17 @@ def file_test(request):
     if request.method == 'POST':
         form = AlgorithmRunForm(request.POST, request.FILES)
         if form.is_valid():
+            out_file = File(open("./pgss15compbio/media/out_file.txt", "w+"))
+            p = Parser()
+            model = p.get_model(request.FILES['input_file'], out_file)
+            model.iterate()
             new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'])
             new_algorithm_run.save()
-
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('skeletonpages.views.file_test'))
+            h = HttpResponseRedirect("../../media/out_file.txt")
+
+            return h
+            
     else:
         form = AlgorithmRunForm() # A empty, unbound form
 
