@@ -1,0 +1,67 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+
+{% block title %}GAUSS | SciReact{% endblock %}
+
+{% block content %}
+{% include "common/_header.html" %}
+
+<br><br>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
+    {% if user.username == profile.user.username %}
+      <div class="my-profile">My Profile</div>
+      <div class="profile-group">
+        <span class="profile-attribute">Name: </span>
+        <span class="profile-attribute-value">{{ profile.user.get_full_name }}</span>
+      </div>
+      <div class="profile-group">
+        <span class="profile-attribute">Email: </span>
+        <span class="profile-attribute-value">{{ profile.user.email }}</span>
+      </div>
+      <div class="profile-group">
+        <span class="profile-attribute">Organization: </span>
+        <span class="profile-attribute-value">{{ profile.organization }}</span>
+      </div>
+      <div class="profile-group">
+        <span class="profile-attribute">Fields: </span>
+        <span class="profile-attribute-value">{{ profile.scientific_field }}</span>
+      </div>
+    {% endif %}
+
+      <!-- <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" /> -->
+  </div>
+  <div class="col-md-5">
+    <div class="my-profile">
+      My Simulations
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row gauss-row">
+  <div class="col-md-12">
+    <div class="text-center gauss">
+      GAUSS
+    </div>
+  </div>
+</div>
+
+<hr>
+
+{% include "common/_footer.html" %}  
+
+<script>
+
+$(window).load(function(){
+  h = $(".background-image").height();
+  $(".black-overlay-2").height(h);
+});
+
+</script>
+
+{% endblock %}
