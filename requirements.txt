@@ -10,6 +10,7 @@ html2text==2014.12.29
 ipython==3.2.0
 Pillow==2.9.0
 psycopg2==2.6.1
+PyMouse==1.0
 six==1.9.0
 static3==0.6.1
 wheel==0.24.0
