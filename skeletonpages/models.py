@@ -16,8 +16,22 @@ class DemoObject(models.Model):
   def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
+class AlgorithmRun(models.Model):
+  name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
+  description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
+  input_file = models.FileField(upload_to = "documents/%Y/%m/%d", null = True, blank = True)
+  output_file = models.FileField(upload_to = "documents/output/%Y/%m/%d", null = True, blank = True)
+  input_text = models.CharField(max_length = 8192, null = True, blank = True, verbose_name = "Input Text")
+  output_text = models.CharField(max_length = 32768, null = True, blank = True, verbose_name = "Output Text")
+
+  def __unicode__(self):
+    return "{}".format(self.name[:30] or self.description[:30] or "Unnamed Algorithm Run")
+
+
 class UserProfile(UserenaBaseProfile):
   user = models.OneToOneField(User)
+
+  algorithm_runs = models.ManyToManyField(AlgorithmRun)
 
   organization = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Organization Name")
   scientific_field = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Field")
@@ -32,13 +46,3 @@ class UserProfile(UserenaBaseProfile):
   def create_user_profile(sender, instance, created, **kwargs):
       if created:
           UserProfile.objects.create(user=instance)
-
-
-class AlgorithmRun(models.Model):
-  user_profile = models.OneToOneField(UserProfile, null = True)
-  name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
-  description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
-  input_file = models.FileField(upload_to = "documents/%Y/%m/%d", null = True, blank = True)
-  output_file = models.FileField(upload_to = "documents/output/%Y/%m/%d", null = True, blank = True)
-  input_text = models.CharField(max_length = 8192, null = True, blank = True, verbose_name = "Input Text")
-  output_text = models.CharField(max_length = 32768, null = True, blank = True, verbose_name = "Output Text")
