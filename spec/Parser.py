@@ -5,7 +5,7 @@ from Reaction import Reaction
 from Model import Model
 class Parser(object):
 
-    def get_model(self, f, outFile):
+    def get_model(self, f, outFile, timeout, loggingfreq):
         """Returns a model for a given input file
 
         f: input .react file name
@@ -13,11 +13,11 @@ class Parser(object):
         states = {}
         section_title=""
         reactions = []
-        reaction_file = open(f, "r")
+        reaction_file = f
         output_reagents = []
         for line in reaction_file:
             line = line.rstrip()
-            #print line
+            # print line
             if line.startswith("#") or line == "":
                 continue
             elif line.startswith("["):
@@ -68,12 +68,12 @@ class Parser(object):
                                 products.append((product[i:], coeff))
                                 break
                 reactions.append(Reaction(states, reactants + products, k))
-            elif '[Output_Reagents' in section_title:
-                output_reagents.append(line.strip())
             elif "[Output_Frequency" in section_title:
                 output_frequency = int(float(line.strip()))
                 if output_frequency <= 0:
                     raise ValueError("Output frequency must be positive")
+            elif "[Output_Reagents" in section_title:
+                pass
             elif "[RNG_Seed" in section_title:
                 rng_seed = line.strip()
                 if rng_seed != "r":
@@ -93,20 +93,5 @@ class Parser(object):
             if reagent not in states:
                raise ValueError("Ouput Reagent {} not defined".format(
                                 reagent))
-        #print "laskdj"
-        return Model(states, reactions, output_frequency, output_reagents,
-                                            num_iterations, rng_seed, outFile)
-
-
-
-if __name__ == "__main__":
-    print Parser().get_model("./InputFileFormat.react")
-
-
-
-
-
-
-
-
-
+        return Model(states, reactions, output_frequency,
+                        num_iterations, rng_seed, outFile, timeout, loggingfreq)
