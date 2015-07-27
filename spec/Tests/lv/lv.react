@@ -1,0 +1,26 @@
+[Iterations]
+#   Number of iterations
+    10
+[Reagents]
+#   Name:Number
+#   Only input integer values as values
+    R:1000
+    W:2000
+[Reactions]
+#   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
+#   If nothing created or used in reaction, then use $ sign
+#   Only input integer values as coefficients
+    1R -> 2R | 10
+    1R + 1W -> 2W | 0.01
+    1W -> $ | 10
+[Output_Reagents]
+#   Name 1
+    R
+    W
+[Output_Frequency]
+#   (int) Logging frequency in iterations
+    10
+[RNG_Seed]
+#   (int) Random seed
+#   use r character for random seed
+    r
