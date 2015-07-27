@@ -89,7 +89,7 @@ ROOT_URLCONF = 'pgss15compbio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', 'skeletonpages/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -155,6 +155,9 @@ ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 AUTH_PROFILE_MODULE = 'skeletonpages.UserProfile'
 
