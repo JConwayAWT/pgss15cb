@@ -13,11 +13,11 @@
 <div class="row">
 	<div id="data" class="col-md-4 col-md-offset-1 pre-scrollable" align="center">
 	</div>
-	hello
 
 	<div class="col-md-5 col-md-offset-1" align="center">
 		<div id="myDiv" width="500" height="400"></div>
 		<script>
+
 			var trace1 = {
 				x: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
 				y: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
@@ -55,7 +55,7 @@
 
 		<script type="text/javascript"charset="utf-8">
 			var dt = [];
-            d3.text("http://vincentarelbundock.github.io/Rdatasets/csv/datasets/AirPassengers.csv", function(data)
+            d3.text("media/out_file.csv", function(data)
             	{
 	                var parsedCSV = d3.csv.parseRows(data);
 	                for (var i=1; i<parsedCSV.length; i++)
