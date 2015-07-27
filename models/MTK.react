@@ -76,31 +76,6 @@
     mapkpase_mapkpp -> mapkpase + mapkpp | 10
     mapkpase_mapkpp -> mapkpase + mapkp | 1000
 
-
-
-[Output_Reagents]
-#   Name 1
-    mapkkk
-    mapkkkp
-    mapkk
-    mapkkp
-    mapkkpp
-    mapkkpase
-    mapk
-    mapkp
-    mapkpp
-    mapkpase
-    e1_mapkkk
-    e2_mapkkkp
-    mapkkkp_mapkk
-    mapkkkp_mapkkp
-    mapkkpase_mapkkp
-    mapkkpase_mapkkpp
-    mapkkpp_mapk
-    mapkpase_mapkp
-    mapkkpp_mapkp
-    mapkpase_mapkpp
-# NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10

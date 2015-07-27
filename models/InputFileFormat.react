@@ -15,11 +15,7 @@
 #   Only input integer values as coefficients
     2Oranges + 3Grapes -> $ | .14
     2Apples + 3Berries -> 4Cherries | .12
-[Output_Reagents]
-#   Name 1
-    Apples
-    Berries
-    # NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
+
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10

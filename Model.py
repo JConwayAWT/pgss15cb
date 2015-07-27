@@ -6,7 +6,7 @@ import time as tme
 
 class Model(object):
 
-    def __init__(self, states, reactions, output_freq, output_reagents,
+    def __init__(self, states, reactions, output_freq,
                             num_iterations, seed, outFile, timeout, loggingfreq):
         self.states          = states  # [('A',Reagent object of A)]
         # for state in states:
@@ -15,7 +15,7 @@ class Model(object):
         self.reactions       = reactions  # list of Reaction objects
         self.output_freq     = output_freq  # How often to log to file
         self.num_iterations  = num_iterations  # Number of iterations to run
-        self.output_reagents = output_reagents  # Which reagents to output
+        # self.output_reagents = output_reagents  # Which reagents to output
         self.seed = seed
         self.outFile = outFile  #string of output file (ants.csv)
 

@@ -68,8 +68,6 @@ class Parser(object):
                                 products.append((product[i:], coeff))
                                 break
                 reactions.append(Reaction(states, reactants + products, k))
-            elif '[Output_Reagents' in section_title:
-                output_reagents.append(line.strip())
             elif "[Output_Frequency" in section_title:
                 output_frequency = int(float(line.strip()))
                 if output_frequency <= 0:
@@ -93,5 +91,5 @@ class Parser(object):
             if reagent not in states:
                raise ValueError("Ouput Reagent {} not defined".format(
                                 reagent))
-        return Model(states, reactions, output_frequency, output_reagents,
+        return Model(states, reactions, output_frequency,
                         num_iterations, rng_seed, outFile, timeout, loggingfreq)

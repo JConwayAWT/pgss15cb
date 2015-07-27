@@ -13,10 +13,7 @@
     1R -> 2R | 10
     1R + 1W -> 2W | 0.01
     1W -> $ | 10
-[Output_Reagents]
-#   Name 1
-    R
-    W
+
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10

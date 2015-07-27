@@ -39,10 +39,6 @@
     AB + 2B -> ABBB | 0.00000653508
 
 
-[Output_Reagents]
-#   Name 1
-	A
-	B
 
 # NAMES SHOULD EXIST - REAGANTS VALID IN REACTIONS AND OUTPUT REAGENTS
 [Output_Frequency]
