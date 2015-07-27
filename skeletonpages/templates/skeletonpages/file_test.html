@@ -4,7 +4,9 @@
 {% if algorithm_runs %}
     <ul>
     {% for algorithm_run in algorithm_runs %}
-        <li><a href="{{ algorithm_run.input_file.url }}">{{ algorithm_run.input_file.name }}</a></li>
+        {% if algorithm_run.input_file %}
+            <li><a href="{{ algorithm_run.input_file.url }}">{{ algorithm_run.input_file.name }}</a></li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% else %}
