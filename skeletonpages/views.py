@@ -9,6 +9,7 @@ from django.core.files import File
 from time import time
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from random import random
 
 
 def index(request):
@@ -51,6 +52,39 @@ def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
   context = {'simulation': simulation}
   return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
+
+def new_simulation(request):
+  form = AlgorithmRunForm()
+  return render_to_response('skeletonpages/new_simulation.html', 
+                            {'form': form}, 
+                            context_instance = RequestContext(request))
+
+def create_simulation(request):
+  form = AlgorithmRunForm(request.POST, request.FILES)
+  if form.is_valid():
+    file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
+    out_file = File(open(file_name, "w+"))
+    p = Parser()
+    model = p.get_model(request.FILES['input_file'], out_file)
+    model.iterate()
+    new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
+      output_file = out_file, name=request.POST['name'],
+      description = request.POST['description'])
+
+    # import pdb
+    # pdb.set_trace()
+
+    new_algorithm_run.save()
+    request.user.userprofile.algorithm_runs.add(new_algorithm_run)
+    request.user.userprofile.save()
+
+    context = {'simulation': new_algorithm_run}
+
+
+    return render_to_response('skeletonpages/show_simulation.html',
+      context,
+      RequestContext(request)
+      )
 
 def file_test(request):
     # Handle file upload

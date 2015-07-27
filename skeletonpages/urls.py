@@ -9,6 +9,8 @@ urlpatterns = [
   url(r'^instructions/$', views.instructions, name='instructions'),
   url(r'^file_test/$', views.file_test, name='file_test'),
   url(r'^simulations/(?P<simulation_id>\d+)/show', views.show_simulation, name="show_simulation"),
+  url(r'^simulations/new/$', views.new_simulation, name="new_simulation"),
+  url(r'^simulations/create/$', views.create_simulation, name="create_simulation"),
   
   
   

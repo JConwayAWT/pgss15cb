@@ -1,0 +1,50 @@
+{% include "common/_header.html" %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
+      <h1 style="font-size: 80px">New Simulation</h1>
+      <div class="new-simulation-description">
+        Please upload a file in GAUSS .react format (see here for samples and instructions).
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="text-center">
+
+      <form action="{% url 'create_simulation' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br><br>
+        <p>{{ form.non_field_errors }}</p>
+        <p class="text-center" style="margin-left: 25%">
+            {{ form.input_file.errors }}
+            {{ form.input_file }}
+        </p>
+        <br>
+        <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
+        <br>
+        <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
+        <br><br>
+        <p><button type="submit" value="Upload" class="btn btn-primary btn-lg">Start Simulation</button</p>
+      </form>
+
+
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class="row gauss-row">
+  <div class="col-md-12">
+    <div class="text-center gauss">
+      GAUSS
+    </div>
+  </div>
+</div>
+
+
+{% include "common/_footer.html" %}
