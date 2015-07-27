@@ -17,7 +17,7 @@
     </div>
     </div>
   </div>
-
+  
   <br><br>
 
   <div class="row">
@@ -72,31 +72,30 @@
           <button type="button" class="btn btn-default" id="add_reaction">Add Reaction</button>
         </div>
         
-        <div class="row col-lg-12">
-          <label>Output Frequency:</label>
-          <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+        <div>
+          <label class="row col-lg-12">Output Frequency:</label>
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+          </div>
         </div>
 
-        <div class="row">
+        <div class="row col-lg-12">
           <label>Random Seed:</label>
-          <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          </div>
         </div>
 
         <div id="incomplete_data" class="alert alert-danger" role="alert" style="display:none">
           You must enter have data for all fields.
         </div>
 
-        <div class="row">
-          <input type="submit" class="btn btn-default" id="run_sim" value="Run Simulation">
+        
+
+        <div class="row col-lg-12">
+          <button type="button" class="btn btn-default" id="run_sim">Run Simulation</button>
         </div>
 
-        <div class="row">
-          <ul class="list-group" id="listOfInputs">
-              
-              
-              
-          </ul>
-        </div>
 
         <div class="row">
           <a download="info.react" id="downloadlink">Download</a>
@@ -114,7 +113,6 @@
   $("#add_reagent").click(function(){
       var reagent_name = $("#reagent").val();
       var reagent_concen = $("#reagent_concen").val();
-
       if (reagent_name == "" || reagent_concen == "") {
         $("#incomplete_reagent").attr("style", "display:block");
       }
@@ -124,16 +122,13 @@
         all_reagent_concen.push(reagent_concen);
         $("#reagent").val("");
         $("#reagent_concen").val("");
-
         $("#reagentNamesList").text("[" + all_reagent_names + "]");
         $("#reagentConcenList").text("[" + all_reagent_concen + "]");
       }
   });
-
   var all_reactions = [];
   $("#add_reaction").click(function(){
       var reaction = $("#reaction").val();
-
       if (reaction == "") {
         $("#incomplete_reaction").attr("style", "display:block");
       }
@@ -141,68 +136,47 @@
         $("#incomplete_reaction").hide();
         all_reactions.push(reaction);
         $("#reaction").val("");
-
         $("#reactionList").text(all_reactions);
       }
   });
-
   $("#run_sim").click(function(){
       if (num_of_iterations == "" || output_frequency == "" || random_seed == "") {
         $("#incomplete_data").attr("style", "display:block");
       }
       else {
         $("#incomplete_reaction").hide();
-
         var link = document.getElementById('downloadlink');
-
         var data = "[Iterations]\n" + num_of_iterations
                     
-
         
-
-
-
         link.href = makeTextFile(textbox.value);
-
       }
   });
-
   var textFile = null,
   makeTextFile = function (text) {
     var data = new Blob([text], {type: 'text/plain'});
-
     // If we are replacing a previously generated file we need to
     // manually revoke the object URL to avoid memory leaks.
     if (textFile !== null) {
       window.URL.revokeObjectURL(textFile);
     }
-
     textFile = window.URL.createObjectURL(data);
-
     return textFile;
   };
-
   /*
   var count = 0;
   $("#run_sim").click(function(){
-
     var num_of_iterations = $("#num_of_iterations").val();
     
-
-
-
   alert("chris got no game");
     if (count === 0)
     {
       var text = $("#molecule").val();
       $("#moleculeList").text(text);
-
       var initconcen = $("#initConcen").val();
       alert(initconcen);
       initconcen = text.substring(0,3) + "-" + initconcen;
       $("#concentrations").text(initconcen);
-
-
       count ++;
     }
     else
@@ -212,13 +186,10 @@
       newText = newText.substring(0,3);       //cuts newText to only first 3 letters
       text = text + ", " + $("#molecule").val(); //creates total text value for mol. list
       $("#moleculeList").text(text);
-
       var initconcen = $("#concentrations").text();
       var x = parseInt($("#initConcen").text());
       initconcen = initconcen + ", " + newText + "-" + x;
       $("#concentrations").text(initconcen);
-
-
     }
   });
 */
@@ -228,19 +199,15 @@
 <script>
   var count = 0;
   $("#addData").click(function(){
-
   alert("chris got no game");
     if (count === 0)
     {
       var text = $("#molecule").val();
       $("#moleculeList").text(text);
-
       var initconcen = $("#initConcen").val();
       alert(initconcen);
       initconcen = text.substring(0,3) + "-" + initconcen;
       $("#concentrations").text(initconcen);
-
-
       count ++;
     }
     else
@@ -250,26 +217,30 @@
       newText = newText.substring(0,3);       //cuts newText to only first 3 letters
       text = text + ", " + $("#molecule").val(); //creates total text value for mol. list
       $("#moleculeList").text(text);
-
       var initconcen = $("#concentrations").text();
       var x = parseInt($("#initConcen").text());
       initconcen = initconcen + ", " + newText + "-" + x;
       $("#concentrations").text(initconcen);
-
-
     }
   });
 </script>
 
 <style>
-.row{
-  padding: 10px;
-}
-#body{
-  padding-top: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
+  label {
+    padding-top: 30px;
+    padding-right: 10px;
+    padding: left: 10px;
+  }
+  #dwnld{
+    font-size: 30px;
+  }
+  a:hover{
+    text-decoration: none;
+    cursor:pointer;
+  }
+  button{
+    padding-top: 25px;
+  }
 </style>
 
 {% include 'common/_footer.html' %}
