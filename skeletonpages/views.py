@@ -16,8 +16,22 @@ def index(request):
   return render_to_response('skeletonpages/index.html', context, RequestContext(request))
 
 def input(request):
-	context = {'active_tab': '#input-nav'}
-	return render_to_response('skeletonpages/input.html', context, RequestContext(request))
+  if request.method == 'POST':
+    form = AlgorithmRunForm(request.POST, request.FILES)
+    if form.is_valid():
+      out_file = File(open("./pgss15compbio/media/out_file.txt", "w+"))
+      p = Parser()
+      model = p.get_model(request.FILES['input_file'], out_file)
+      model.iterate()
+      new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
+        output_file=out_file)
+      new_algorithm_run.save()
+      # Redirect to the document list after POST
+      h = HttpResponseRedirect("../../media/out_file.txt")
+      return h
+  
+  context = {'active_tab': '#input-nav'}
+  return render_to_response('skeletonpages/input.html', context, RequestContext(request))
 
 def output(request):
   context = {'active_tab': '#output-nav'}
@@ -45,7 +59,8 @@ def file_test(request):
             p = Parser()
             model = p.get_model(request.FILES['input_file'], out_file)
             model.iterate()
-            new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'])
+            new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
+              output_file=out_file)
             new_algorithm_run.save()
             # Redirect to the document list after POST
             h = HttpResponseRedirect("../../media/out_file.txt")
