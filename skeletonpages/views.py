@@ -19,18 +19,20 @@ def input(request):
   if request.method == 'POST':
     form = AlgorithmRunForm(request.POST, request.FILES)
     if form.is_valid():
-      out_file = File(open("./pgss15compbio/media/out_file.txt", "w+"))
+      out_file = File(open("./pgss15compbio/media/out_file.csv", "w+"))
       p = Parser()
       model = p.get_model(request.FILES['input_file'], out_file)
       model.iterate()
-      new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
+      new_algorithm_run = AlgorithmRun(input_file=request.FILES['input_file'],
         output_file=out_file)
       new_algorithm_run.save()
       # Redirect to the document list after POST
-      h = HttpResponseRedirect("../../media/out_file.txt")
+      h = HttpResponseRedirect("../../media/out_file.csv")
       return h
+  else:
+    form = AlgorithmRunForm() # A empty, unbound form
   
-  context = {'active_tab': '#input-nav'}
+  context = {'active_tab': '#input-nav', 'form': form}
   return render_to_response('skeletonpages/input.html', context, RequestContext(request))
 
 def output(request):
