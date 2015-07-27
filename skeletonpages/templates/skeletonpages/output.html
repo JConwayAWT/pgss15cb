@@ -17,50 +17,15 @@
 	<div class="col-md-5 col-md-offset-1" align="center">
 		<div id="myDiv" width="500" height="400"></div>
 		<script>
-
-			var trace1 = {
-				x: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
-				y: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
-				name: "Name of Trace 1", 
-				type: "scatter"
-			};
-			var trace2 = {
-				x: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
-				y: [1, 0, 3, 2, 5, 4, 7, 6, 8], 
-				name: "Name of Trace 2", 
-				type: "scatter"
-			};
-			var data = [trace1, trace2];
-			var layout = {
-				title: "Plot Title", 
-				xaxis: {
-					title: "x Axis", 
-					titlefont: {
-						family: "Courier New, monospace", 
-						size: 18, 
-						color: "#7f7f7f"
-					}
-				}, 
-				yaxis: {
-					title: "y Axis", 
-					titlefont: {
-						family: "Courier New, monospace", 
-						size: 18, 
-						color: "#7f7f7f"
-					}
-				}
-			};
-			Plotly.plot("myDiv", data, layout);
-		</script>
-
-		<script type="text/javascript"charset="utf-8">
+			var time = []
 			var dt = [];
-            d3.text("media/out_file.csv", function(data)
+            d3.text("../../media/out_file.csv", function(data)
             	{
 	                var parsedCSV = d3.csv.parseRows(data);
 	                for (var i=1; i<parsedCSV.length; i++)
 	                {
 	                	dt.push([parsedCSV[i][1],parsedCSV[i][2]]);
+	                	time.push([parsedCSV[i][0]]);
 	                }
 	                var container = d3.select("div#data")
 	                    .append("table").classed('table table', true)
@@ -71,9 +36,45 @@
 	                        .data(function(d) { return d; }).enter()
 	                        .append("td")
 	                        .text(function(d) { return d; });
-            	}
-            );
-        </script>
+	                console.log(time)
+                    var trace1 = {
+                    	x: time, 
+                    	y: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+                    	name: "Name of Trace 1", 
+                    	type: "scatter"
+                    };
+                    var trace2 = {
+                    	x: time, 
+                    	y: [1, 0, 3, 2, 5, 4, 7, 6, 8], 
+                    	name: "Name of Trace 2", 
+                    	type: "scatter"
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                    	title: "Plot Title", 
+                    	xaxis: {
+                    		title: "x Axis", 
+                    		titlefont: {
+                    			family: "Courier New, monospace", 
+                    			size: 18, 
+                    			color: "#7f7f7f"
+                    		}
+                    	}, 
+                    	yaxis: {
+                    		title: "y Axis", 
+                    		titlefont: {
+                    			family: "Courier New, monospace", 
+                    			size: 18, 
+                    			color: "#7f7f7f"
+                    		}
+                    	}
+                    };
+                    Plotly.plot("myDiv", data, layout);
+                }
+                );
+
+			
+		</script>
 	</div>
 	<script>
 	$("#downloadFile").click(function(){
