@@ -1,11 +1,50 @@
 {% include 'common/_header.html' %}
 
-<div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		<div class="alert alert-info">
-			This is what your about_us page looks like.  Your active tab is {{ active_tab }}.
-		</div>
-	</div>
-</div>
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+    <!-- START THE FEATURETTES -->
+    <div class = "container marketing">
+      <hr class="featurette-divider">
 
-{% include 'common/_footer.html' %}
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">A Powerful Engine.<span class="text-muted"> It'll blow your mind.</span></h2>
+          <p class="lead">Our in-house, custom engine gets accurate results. Using the Gillespie algorithm and the Lotka-Volterra model, the engine can simulate an
+            infinite amount of reactions with a different initial constraints.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">Platform Agnostic.<span class="text-muted"> Run once, use anywhere.</span></h2>
+            <p class="lead">GAUSS is a strong, independent web application that doesn't need much resources. The cloud-based platform will run your simulations, all from 
+              your favorite web-connnected device.</p>
+            </div>
+            <div class="col-md-5 col-md-pull-7">
+              <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">Beautiful. <span class="text-muted"></span></h2>
+              <p class="lead">GAUSS is made with care from the latest Bootstrap. Our custom CSS ensures that your results come out looking their very best. Who says that computational biology can't be pretty?</p>
+            </div>
+            <div class="col-md-5">
+              <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <!-- /END THE FEATURETTES -->
+        </div>
+        {% include 'common/_footer.html' %}
