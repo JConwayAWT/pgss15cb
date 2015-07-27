@@ -24,8 +24,6 @@ with open(sys.argv[1], 'r') as inFile:
 ax = plt.axes()
 for i in range(1, len(data)):
 	ax.plot(data[0], data[i], "-", label=header[i].strip())
-# fig = plt.figure()
-# ax = plt.axes(projection = '3d')
-# ax.plot(x, y, time, '-b')
+
 plt.legend()
 plt.show()
