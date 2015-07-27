@@ -25,5 +25,10 @@ ax = plt.axes()
 for i in range(1, len(data)):
 	ax.plot(data[0], data[i], "-", label=header[i].strip())
 
+plt.grid(b=True, which = 'major', color = 'b', linestyle = '-')
+plt.minorticks_on()
+plt.grid(b=True, which = 'minor', color = 'k', linestyle = '--')
+
+
 plt.legend()
 plt.show()
