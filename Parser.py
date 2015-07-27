@@ -5,7 +5,7 @@ from Reaction import Reaction
 from Model import Model
 class Parser(object):
 
-    def get_model(self, f, outFile):
+    def get_model(self, f, outFile, timeout, loggingfreq):
         """Returns a model for a given input file
 
         f: input .react file name
@@ -13,7 +13,7 @@ class Parser(object):
         states = {}
         section_title=""
         reactions = []
-        reaction_file = open(f, "r")
+        reaction_file = f
         output_reagents = []
         for line in reaction_file:
             line = line.rstrip()
@@ -94,18 +94,4 @@ class Parser(object):
                raise ValueError("Ouput Reagent {} not defined".format(
                                 reagent))
         return Model(states, reactions, output_frequency, output_reagents,
-                                            num_iterations, rng_seed, outFile)
-
-
-
-if __name__ == "__main__":
-    print Parser().get_model("./InputFileFormat.react")
-
-
-
-
-
-
-
-
-
+                        num_iterations, rng_seed, outFile, timeout, loggingfreq)
