@@ -31,9 +31,52 @@
   <div class="col-md-6 col-md-offset-3">
     <div class="text-center">
       <h1 style="font-size: 80px">This is the place where beautiful graphs will go.</h1>
+      <div id="myDiv"></div>
+      <script>
+        var simulation_values = {{ simulation_values }}
+        var keys = []
+        for (var key in simulation_values) {
+          keys.push(key)
+        }
+        console.log(simulation_values)
+        console.log(keys)
+        var trace1 = {
+            x: simulation_values.R,
+            y: simulation_values.W, 
+            name: "Name of Trace 1", 
+            type: "scatter"
+          };
+          var data = [trace1];
+          var layout = {
+            title: "Plot Title", 
+            xaxis: {
+              title: "Rabbits", 
+              titlefont: {
+                family: "Courier New, monospace", 
+                size: 18, 
+                color: "#7f7f7f"
+              }
+            }, 
+            yaxis: {
+              title: "Wolves", 
+              titlefont: {
+                family: "Courier New, monospace", 
+                size: 18, 
+                color: "#7f7f7f"
+              }
+            }
+          };
+          Plotly.plot("myDiv", data, layout);
+      </script>
+
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div id="data" class="col-md-4 col-md-offset-1 pre-scrollable" align="center">
+  </div>
+
 <br><br><br><br><br><br>
 
 <script>
