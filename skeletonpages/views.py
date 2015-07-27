@@ -10,6 +10,7 @@ from time import time
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from random import random
+import json
 
 
 def index(request):
@@ -50,7 +51,33 @@ def about_us(request):
 
 def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
-  context = {'simulation': simulation}
+
+  output_file = open(simulation.output_file.path, "r")
+  first_line = output_file.readline()
+
+  list_of_lists = []
+  for variable_name in first_line.strip().split(","):
+    list_of_lists.append([variable_name])
+
+  for line in output_file.readlines():
+    # ipdb.set_trace()
+    split_line = line.split(",")
+    for index, value in enumerate(split_line):
+      list_of_lists[index].append(float(value.rstrip()))
+
+  dictionary = {}
+  for sublist in list_of_lists:
+    dictionary.update( { sublist[0]: sublist[1:] } )
+
+  values_dictionary_as_json = json.dumps(dictionary)
+
+  # import ipdb
+  # ipdb.set_trace()
+
+  context = {'simulation': simulation, 'values': values_dictionary_as_json}
+
+
+
   return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
 
 def new_simulation(request):
