@@ -1,6 +1,7 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
+{% load extras %}
 
 
 {% block title %}GAUSS | SciReact{% endblock %}
@@ -34,26 +35,50 @@
 
       <!-- <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" /> -->
   </div>
-  <div class="col-md-5">
-    <div class="my-profile text-right">
-      My Simulations
-    </div>
-    <div class="text-right">
+</div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+      <div class="my-profile">
+        My Simulations
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <div class="text-left">
       <a href="/skeletonpages/simulations/new/">
         <button class="btn btn-default">
           New Simulation
         </button>
       </a>
     </div>
-    {% for run in profile.algorithm_runs.all %}
-      <div class="algorithm-run-link text-right">
-        {{ run.name }}
-      </div>
-    {% endfor %}
   </div>
 </div>
+<br>
 
-<hr>
+{% for run in profile.algorithm_runs.all %}
+  {% ifequal forloop.counter0|modulo:3 0 %}
+    <div class="row" style="margin-left: 7.5%; margin-right: 7.5%">
+  {% endifequal %}
+    <div class="col-md-4">
+      <div class="run-top-portion">
+          <div class="run-name text-center">
+            <a href="/skeletonpages/simulations/{{run.id}}/show/" class="run-name"> {{ run.name }}</a>
+          </div>
+        </div>
+        <div class="run-bottom-portion">
+          <div class="run-desc text-center">
+            <br>
+            {{ run.description }}
+          </div>
+        </div>
+      </div>
+
+  {% if forloop.counter0|modulo:3 == 2 or forloop.last %}
+    </div>
+    <br>
+  {% endif %}
+{% endfor %}
 
 <div class="row gauss-row">
   <div class="col-md-12">
@@ -62,8 +87,6 @@
     </div>
   </div>
 </div>
-
-<hr>
 
 {% include "common/_footer.html" %}  
 
