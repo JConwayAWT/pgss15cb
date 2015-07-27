@@ -72,6 +72,8 @@ class Parser(object):
                 output_frequency = int(float(line.strip()))
                 if output_frequency <= 0:
                     raise ValueError("Output frequency must be positive")
+            elif "[Output_Reagents" in section_title:
+                pass
             elif "[RNG_Seed" in section_title:
                 rng_seed = line.strip()
                 if rng_seed != "r":

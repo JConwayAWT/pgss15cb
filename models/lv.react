@@ -17,6 +17,7 @@
 [Output_Frequency]
 #   (int) Logging frequency in iterations
     10
+    
 [RNG_Seed]
 #   (int) Random seed
 #   use r character for random seed
