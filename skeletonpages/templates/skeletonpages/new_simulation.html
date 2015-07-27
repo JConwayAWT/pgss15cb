@@ -1,37 +1,60 @@
 {% include "common/_header.html" %}
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="text-center">
-      <h1 style="font-size: 80px">New Simulation</h1>
-      <div class="new-simulation-description">
-        Please upload a file in GAUSS .react format (see here for samples and instructions).
+<div class="before-processing">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
+        <h1 style="font-size: 80px">New Simulation</h1>
+        <div class="new-simulation-description">
+          Please upload a file in GAUSS .react format (see here for samples and instructions).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="text-center">
+
+        <form action="{% url 'create_simulation_ajax' %}" method="post" enctype="multipart/form-data">
+          <div id="csrf">
+            {% csrf_token %}
+          </div>
+          <br><br>
+          <p>{{ form.non_field_errors }}</p>
+          <p class="text-center" style="margin-left: 25%">
+              {{ form.input_file.errors }} <!-- id = id_input_file -->
+              {{ form.input_file }}
+          </p>
+          <br>
+          <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
+          <br>
+          <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
+          <br><br>
+          <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button</p>
+        </form>
+
+
       </div>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="text-center">
+<div class="while-processing" style="display: none">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center">
 
-      <form action="{% url 'create_simulation' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <br><br>
-        <p>{{ form.non_field_errors }}</p>
-        <p class="text-center" style="margin-left: 25%">
-            {{ form.input_file.errors }}
-            {{ form.input_file }}
-        </p>
-        <br>
-        <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
-        <br>
-        <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
-        <br><br>
-        <p><button type="submit" value="Upload" class="btn btn-primary btn-lg">Start Simulation</button</p>
-      </form>
+        <div class="gauss" style="font-size:60px">
+          GAUSS IS PROCESSING
+        </div>
+        <img src="/static/spinner.gif">
+        <div class="gauss" style="font-size:60px">
+          PLEASE WAIT
+        </div>
 
 
+      </div>
     </div>
   </div>
 </div>
@@ -48,3 +71,49 @@
 
 
 {% include "common/_footer.html" %}
+
+<script>
+
+  $(document).ready(function(){
+    $("#submitted").click(function(){
+      $(".before-processing").toggle();
+      $(".while-processing").toggle();
+      var file = $("#id_input_file").prop("files")[0];
+      var name = $("#simulation_name").val();
+      var desc = $("#simulation_description").val();
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", $("#csrf").find("input").prop("value"));
+          }
+        }
+      });
+      
+
+      $.ajax({
+        url: '/skeletonpages/simulations/create/ajax',
+        type: 'POST',
+        data: {name: name, description: desc, file: file},
+        processData: false,
+        beforeSend: function(xhr, settings){
+          console.log("before send...");
+          $.ajaxSettings.beforeSend(xhr, settings);
+        }
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+
+    });
+  });
+
+</script>
