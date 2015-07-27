@@ -1,5 +1,5 @@
 {% include 'common/_header.html' %}
-<div class="row" align="center">
+<div class="row col-lg-12" style="padding-bottom:50px" align="center">
 	<button type="button" class="btn btn-default" id="downloadFile">Download .react File</button>
 </div>
 
@@ -9,9 +9,43 @@
 	</div>
 
 	<div class="col-md-5 col-md-offset-1" align="center">
-		<canvas id="myChart" width="500" height="400"></canvas>
-		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+		<div id="myDiv" width="500" height="400"></div>
+		<script>
+			var trace1 = {
+				x: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+				y: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+				name: "Name of Trace 1", 
+				type: "scatter"
+			};
+			var trace2 = {
+				x: [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+				y: [1, 0, 3, 2, 5, 4, 7, 6, 8], 
+				name: "Name of Trace 2", 
+				type: "scatter"
+			};
+			var data = [trace1, trace2];
+			var layout = {
+				title: "Plot Title", 
+				xaxis: {
+					title: "x Axis", 
+					titlefont: {
+						family: "Courier New, monospace", 
+						size: 18, 
+						color: "#7f7f7f"
+					}
+				}, 
+				yaxis: {
+					title: "y Axis", 
+					titlefont: {
+						family: "Courier New, monospace", 
+						size: 18, 
+						color: "#7f7f7f"
+					}
+				}
+			};
+			Plotly.plot("myDiv", data, layout);
+		</script>
+
 		<script type="text/javascript"charset="utf-8">
 			var dt = [];
             d3.text("http://vincentarelbundock.github.io/Rdatasets/csv/datasets/AirPassengers.csv", function(data)
@@ -32,57 +66,7 @@
 	                        .text(function(d) { return d; });
             	}
             );
-			// Get context with jQuery - using jQuery's .get() method.
-			// This will get the first returned node in the jQuery collection.
-			var data = {
-			    labels: ["January", "February", "March", "April", "May", "June", "July"], //x-axis labels
-			    datasets: [
-			        {
-			            label: "My First dataset",
-			            fillColor: "rgba(220,220,220,0.2)",
-			            strokeColor: "rgba(220,220,220,1)",
-			            pointColor: "rgba(220,220,220,1)",
-			            pointStrokeColor: "#fff",
-			            pointHighlightFill: "#fff",
-			            pointHighlightStroke: "rgba(220,220,220,1)",
-			            data: [65, 59, 80, 81, 56, 55, 40]
-			        },
-			        {
-			            label: "My Second dataset",
-			            fillColor: "rgba(151,187,205,0.2)",
-			            strokeColor: "rgba(151,187,205,1)",
-			            pointColor: "rgba(151,187,205,1)",
-			            pointStrokeColor: "#fff",
-			            pointHighlightFill: "#fff",
-			            pointHighlightStroke: "rgba(151,187,205,1)",
-			            data: [28, 48, 40, 19, 86, 27, 90]
-			        }
-			    ]
-			};
-			var layout = {
-  				title: "Plot Title",
-				xaxis: {
-				    title: "x Axis",
-				    titlefont: {
-				    	family: "Courier New, monospace",
-				    	size: 18,
-				    	color: "#7f7f7f"
-				    }
-				},
-				yaxis: {
-				    title: "y Axis",
-				    titlefont: {
-				    	family: "Courier New, monospace",
-				    	size: 18,
-				    	color: "#7f7f7f"
-				    }
-				  }
-			};
-			var ctx = $("#myChart").get(0).getContext("2d");
-			var myLineChart = new Chart(ctx).Line(data, layout);
-			//Plotly.plot("myChart", firstLine);
-		</script>
-
+        </script>
 	</div>
 	<script>
 	$("#downloadFile").click(function(){
