@@ -4,64 +4,31 @@
   <h1 id="title">Upload file</h1>
 
   <p></p>
-
+  <form action="{% url 'input' %}" method="post" enctype="multipart/form-data">
   <div class="col-lg-12">
     <div class="col-lg-4 col-lg-offset-4">
-      <div class="form-group">
-        <label for="exampleInputFile">Upload .react here</label>
-        <input type="file" id="exampleInputFile">
+    <div class = "form-group">
+      {{ form.input_file }}
+      <!--div class="form-group">
+        <label for="id_input_file">Upload .react here</label>
+        <input type="file" id="id_input_file">
       </div>
-    </div><!-- /.col-lg-6 -->
+    </div--><!-- /.col-lg-6 -->
+    </div>
+    </div>
   </div>
-
+  
   <br><br>
 
   <div class="row">
-<<<<<<< HEAD
-    <hr>
-=======
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
     <h1>Input data manually</h1>
 
   </div>
 
-<<<<<<< HEAD
-  <div class="row">
-    <h4>Molecule name</h>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="input-group">
-
-          <input type="text" class="form-control" id="molecule" placeholder="Molecule Name" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-          <input type="number" class="form-control" id="intiConcen" placeholder="Initial Concentration" aria-describedby="basic-addon1">
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" id="addData">Add Data</button>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-6">
-        <ul class="list-group">
-          <li class="list-group-item" id="moleculeList">Click add add to see your molecules appear here</li>
-          <li class="list-group-item" id="concentrations">Concentrations appear here</li>
-        </div>
-      </ul>
-    </div>
-    <div class="row">
-
-    </div>
-  </div>
-=======
   <div class="row" id="body">
     <div class="col-lg-12" align="center">
       
       <div class="bodyArea">
-        <form action="{% url 'input' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
         <div class="input-group col-lg-3" align="center">
           <label>Number of Iterations:</label>
@@ -100,49 +67,45 @@
         <div id="incomplete_reaction" class="alert alert-danger" role="alert" style="display:none">
           You must enter a Reaction Formula.
         </div>
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
 
         <div class="row col-lg-12">
           <button type="button" class="btn btn-default" id="add_reaction">Add Reaction</button>
         </div>
         
-        <div class="row col-lg-12">
-          <label>Output Frequency:</label>
-          <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+        <div>
+          <label class="row col-lg-12">Output Frequency:</label>
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="output_frequency" placeholder="Output Frequency" aria-describedby="basic-addon1">
+          </div>
         </div>
 
-        <div class="row">
+        <div class="row col-lg-12">
           <label>Random Seed:</label>
-          <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          <div style="padding-left:30%; padding-right: 30%;">
+            <input type="text" class="form-control" id="random_seed" placeholder="Random Seed" aria-describedby="basic-addon1">
+          </div>
         </div>
 
         <div id="incomplete_data" class="alert alert-danger" role="alert" style="display:none">
           You must enter have data for all fields.
         </div>
 
-        <div class="row">
-          <input type="submit" class="btn btn-default" id="run_sim" value="Run Simulation">
+        
+
+        <div class="row col-lg-12">
+          <button type="button" class="btn btn-default" id="run_sim">Run Simulation</button>
         </div>
 
-        <div class="row">
-          <ul class="list-group" id="listOfInputs">
-              
-              
-              
-          </ul>
-        </div>
 
         <div class="row">
           <a download="info.react" id="downloadlink">Download</a>
         </div>
-      </form>
       </div>
     </div>
   </div>
+  </form>
 </div>
 
-<<<<<<< HEAD
-=======
 
 <script>
   var all_reagent_names = [];
@@ -150,7 +113,6 @@
   $("#add_reagent").click(function(){
       var reagent_name = $("#reagent").val();
       var reagent_concen = $("#reagent_concen").val();
-
       if (reagent_name == "" || reagent_concen == "") {
         $("#incomplete_reagent").attr("style", "display:block");
       }
@@ -160,16 +122,13 @@
         all_reagent_concen.push(reagent_concen);
         $("#reagent").val("");
         $("#reagent_concen").val("");
-
         $("#reagentNamesList").text("[" + all_reagent_names + "]");
         $("#reagentConcenList").text("[" + all_reagent_concen + "]");
       }
   });
-
   var all_reactions = [];
   $("#add_reaction").click(function(){
       var reaction = $("#reaction").val();
-
       if (reaction == "") {
         $("#incomplete_reaction").attr("style", "display:block");
       }
@@ -177,68 +136,47 @@
         $("#incomplete_reaction").hide();
         all_reactions.push(reaction);
         $("#reaction").val("");
-
         $("#reactionList").text(all_reactions);
       }
   });
-
   $("#run_sim").click(function(){
       if (num_of_iterations == "" || output_frequency == "" || random_seed == "") {
         $("#incomplete_data").attr("style", "display:block");
       }
       else {
         $("#incomplete_reaction").hide();
-
         var link = document.getElementById('downloadlink');
-
         var data = "[Iterations]\n" + num_of_iterations
                     
-
         
-
-
-
         link.href = makeTextFile(textbox.value);
-
       }
   });
-
   var textFile = null,
   makeTextFile = function (text) {
     var data = new Blob([text], {type: 'text/plain'});
-
     // If we are replacing a previously generated file we need to
     // manually revoke the object URL to avoid memory leaks.
     if (textFile !== null) {
       window.URL.revokeObjectURL(textFile);
     }
-
     textFile = window.URL.createObjectURL(data);
-
     return textFile;
   };
-
   /*
   var count = 0;
   $("#run_sim").click(function(){
-
     var num_of_iterations = $("#num_of_iterations").val();
     
-
-
-
   alert("chris got no game");
     if (count === 0)
     {
       var text = $("#molecule").val();
       $("#moleculeList").text(text);
-
       var initconcen = $("#initConcen").val();
       alert(initconcen);
       initconcen = text.substring(0,3) + "-" + initconcen;
       $("#concentrations").text(initconcen);
-
-
       count ++;
     }
     else
@@ -248,39 +186,28 @@
       newText = newText.substring(0,3);       //cuts newText to only first 3 letters
       text = text + ", " + $("#molecule").val(); //creates total text value for mol. list
       $("#moleculeList").text(text);
-
       var initconcen = $("#concentrations").text();
       var x = parseInt($("#initConcen").text());
       initconcen = initconcen + ", " + newText + "-" + x;
       $("#concentrations").text(initconcen);
-
-
     }
   });
 */
 </script>
 
 
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
 <script>
   var count = 0;
   $("#addData").click(function(){
-
   alert("chris got no game");
     if (count === 0)
     {
       var text = $("#molecule").val();
       $("#moleculeList").text(text);
-
       var initconcen = $("#initConcen").val();
-<<<<<<< HEAD
-=======
       alert(initconcen);
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
       initconcen = text.substring(0,3) + "-" + initconcen;
       $("#concentrations").text(initconcen);
-
-
       count ++;
     }
     else
@@ -290,33 +217,30 @@
       newText = newText.substring(0,3);       //cuts newText to only first 3 letters
       text = text + ", " + $("#molecule").val(); //creates total text value for mol. list
       $("#moleculeList").text(text);
-
       var initconcen = $("#concentrations").text();
-<<<<<<< HEAD
-      initconcen = initconcen + ", " + newText + "-" + $("#initConcen").val();
-=======
       var x = parseInt($("#initConcen").text());
       initconcen = initconcen + ", " + newText + "-" + x;
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
       $("#concentrations").text(initconcen);
-
-
     }
   });
 </script>
 
-<<<<<<< HEAD
-=======
 <style>
-.row{
-  padding: 10px;
-}
-#body{
-  padding-top: 30px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
+  label {
+    padding-top: 30px;
+    padding-right: 10px;
+    padding: left: 10px;
+  }
+  #dwnld{
+    font-size: 30px;
+  }
+  a:hover{
+    text-decoration: none;
+    cursor:pointer;
+  }
+  button{
+    padding-top: 25px;
+  }
 </style>
 
->>>>>>> 73babaf511c0a30b3d86ff660504d87076fb56c2
 {% include 'common/_footer.html' %}
