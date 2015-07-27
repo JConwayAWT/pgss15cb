@@ -11,6 +11,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from random import random
 import json
+from django.utils.safestring import mark_safe
 
 
 def index(request):
@@ -74,7 +75,7 @@ def show_simulation(request, simulation_id):
   # import ipdb
   # ipdb.set_trace()
 
-  context = {'simulation': simulation, 'values': values_dictionary_as_json}
+  context = {'simulation': simulation, 'simulation_values': mark_safe(dictionary)}
 
 
 
