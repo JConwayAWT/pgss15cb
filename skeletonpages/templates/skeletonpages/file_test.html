@@ -1,0 +1,28 @@
+{% include 'common/_header.html' %}
+
+<!-- List of uploaded documents -->
+{% if algorithm_runs %}
+    <ul>
+    {% for algorithm_run in algorithm_runs %}
+        {% if algorithm_run.input_file %}
+            <li><a href="{{ algorithm_run.input_file.url }}">{{ algorithm_run.input_file.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No documents.</p>
+{% endif %}
+
+<!-- Upload form. Note enctype attribute! -->
+<form action="{% url 'file_test' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{ form.input_file.label_tag }} {{ form.input_file.help_text }}</p>
+    <p>
+        {{ form.input_file.errors }}
+        {{ form.input_file }}
+    </p>
+    <p><input type="submit" value="Upload" /></p>
+</form>
+
+{% include 'common/_footer.html' %}

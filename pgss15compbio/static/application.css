@@ -74,3 +74,102 @@ body{
 	margin-right: 10px;
 	margin-left: 10px;
 }
+
+.my-profile{
+	font-size: 50px;
+	font-weight: bolder;
+}
+
+.profile-attribute{
+	font-weight: bold;
+}
+
+.form-box{
+    padding-bottom: 6px;
+}
+
+.form-control-pad{
+		border-radius: 0px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 100;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+}
+
+.background-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.black-overlay {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+.black-overlay-2 {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gauss{
+	font-size: 200px;
+	font-weight: bolder;
+	padding: 50px;
+}
+
+.gauss-row{
+	background-color: white;
+}
+
+.larger-text{
+	font-size: 30px;
+}
+.ghost-btn {
+  font-family: "Arial";
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #3f6fa0;
+  height: 36px;
+  line-height: 36px;
+  color: #3f6fa0;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+  font-size: 1em;
+  padding: .5em 1.5em;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  background: #ffffff;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  zoom: 1;
+  -webkit-backface-visibility: hidden;
+  position: relative;
+}
+.ghost-btn:hover {
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+  transition: 0.2s ease;
+  background-color: #3f6fa0;
+  color: #ffffff;
+}
+.ghost-btn:focus {
+  outline: none;
+}

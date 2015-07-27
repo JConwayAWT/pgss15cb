@@ -1,0 +1,59 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "GAUSS | SciReact" %}{% endblock %}
+{% block content %}
+{% include "common/_header.html" %}
+
+<br><br>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="center">
+      <span class="larger-text">
+        Edit Profile
+      </span>
+      <span class="text-right" style="float: right; margin-top: 19px">
+        <a href="{% url 'userena_password_change' user.username %}">
+          Edit Password
+        </a>
+      </span>
+      <form action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <fieldset>
+          <p class="form-box">
+            <input placeholder="First name" class="required form-control-pad" id="id_first_name" maxlength="30" name="first_name" type="text" value="{{user.first_name}}"/>
+          </p>
+          <p class="form-box">
+            <input placeholder="Last name" class="required form-control-pad" id="id_last_name" maxlength="30" name="last_name" type="text" value="{{user.last_name}}"/>
+          </p>
+          <p style="display: none;">
+            <label for="id_mugshot">Mugshot:</label><input id="id_mugshot" name="mugshot" type="file"/><span class="helptext">A personal image displayed in your profile.</span>
+          </p>
+          <p style="display: none;">
+            <label for="id_privacy">Privacy:</label>
+            <select id="id_privacy" name="privacy">
+              <option value="open">Open</option>
+              <option value="registered" selected="selected">Registered</option>
+              <option value="closed">Closed</option>
+            </select>
+            <span class="helptext">Designates who can view your profile.</span>
+          </p>
+          <p class="form-box">
+            <input placeholder="Organization" class="required form-control-pad" id="id_organization" maxlength="255" name="organization" type="text" value="{{profile.organization}}"/>
+          </p>
+          <p class="form-box">
+            <input placeholder="Scientific Field" class="required form-control-pad" id="id_scientific_field" maxlength="255" name="scientific_field" type="text" value="{{profile.scientific_field}}"/>
+          </p>
+        </fieldset>
+        <div class="text-center">
+          <button type="submit" class="btn btn-lg btn-primary">UPDATE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% include "common/_footer.html" %}
+{% endblock %}
