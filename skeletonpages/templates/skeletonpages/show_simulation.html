@@ -1,0 +1,39 @@
+{% include "common/_header.html" %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
+      <h1>Simulation Overview</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <div class="name-header">
+      <b>Name:
+      </b>
+    </div>
+    <div class="name-text">{{ simulation.name }}</div>
+  </div>
+  <div class="col-md-5">
+    <div class="description-header">
+      <b>Description:</b>
+    </div>
+    <div class="description-text">
+      {{ simulation.description }}
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="text-center">
+      <h1 style="font-size: 80px">This is the place where beautiful graphs will go.</h1>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br>
+
+{% include "common/_footer.html" %}

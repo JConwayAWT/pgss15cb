@@ -38,6 +38,11 @@
     <div class="my-profile">
       My Simulations
     </div>
+    {% for run in profile.algorithm_runs.all %}
+      <div class="algorithm-run-link">
+        {{ run.name }}
+      </div>
+    {% endfor %}
   </div>
 </div>
 
