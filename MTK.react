@@ -5,15 +5,15 @@
 #   Name:Number
 #   Only input integer values as values
     
-    e1:6022
-    e2:6022 
-    mapkkk:6022 
+    e1:250
+    e2:250
+    mapkkk:250
     mapkkkp:0
-    mapkk:6022 
+    mapkk:250
     mapkkp : 0 
     mapkkpp : 0
     mapkkpase :  6
-    mapk :  6022 
+    mapk :  250
     mapkp : 0
     mapkpp : 0
     mapkpase :  6
