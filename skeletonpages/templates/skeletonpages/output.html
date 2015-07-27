@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="col-md-5 col-md-offset-1" align="center">
-		<canvas id="myChart" width="500" height="500"></canvas>
+		<canvas id="myChart" width="500" height="400"></canvas>
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
 		<script type="text/javascript"charset="utf-8">
@@ -36,37 +36,12 @@
             	}
             );
 
-            function getX() {
-            	var a = [];
-            	for (var i=0; i<dt.length; i+=2)
-            	{
-            		a.push(dt[i][0]);
-            	}
-            	return a;
-            }
-
-            function getY() {
-            	var a = [];
-            	for (var i=1; i<dt.length; i+=2)
-            	{
-            		a.push(dt[i][1]);
-            	}
-            	return a;
-            }
-
 			// Get context with jQuery - using jQuery's .get() method.
 
 			// This will get the first returned node in the jQuery collection.
-			var firstLine = {
-				x: [1,2,3,4,5], //getX(),
-				//x: {{ simulation.x_values }}
-				y: [1,2,3,4,5], //getY(),
-				mode: "lines",
-				type: "scatter"
-			};
 
 			var data = {
-			    labels: ["January", "February", "March", "April", "May", "June", "July"],
+			    labels: ["January", "February", "March", "April", "May", "June", "July"], //x-axis labels
 			    datasets: [
 			        {
 			            label: "My First dataset",
@@ -76,7 +51,7 @@
 			            pointStrokeColor: "#fff",
 			            pointHighlightFill: "#fff",
 			            pointHighlightStroke: "rgba(220,220,220,1)",
-			            data: [65, 59, 80, 81, 56, 55, 40] //getData() 
+			            data: [65, 59, 80, 81, 56, 55, 40]
 			        },
 			        {
 			            label: "My Second dataset",
@@ -90,8 +65,27 @@
 			        }
 			    ]
 			};
+			var layout = {
+  				title: "Plot Title",
+				  xaxis: {
+				    title: "x Axis",
+				    titlefont: {
+				      family: "Courier New, monospace",
+				      size: 18,
+				      color: "#7f7f7f"
+				    }
+				  },
+				  yaxis: {
+				    title: "y Axis",
+				    titlefont: {
+				      family: "Courier New, monospace",
+				      size: 18,
+				      color: "#7f7f7f"
+				    }
+				  }
+				};
 			var ctx = $("#myChart").get(0).getContext("2d");
-			var myLineChart = new Chart(ctx).Line(data);
+			var myLineChart = new Chart(ctx).Line(data, layout);
 			//Plotly.plot("myChart", firstLine);
 		</script>
 
@@ -114,7 +108,7 @@
 
 	    return textFile;
 
-		});
+		}});
 	</script>
 </div>
 
