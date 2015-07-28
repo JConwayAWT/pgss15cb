@@ -186,9 +186,7 @@ body{
 }
 
 .run-top-portion{
-  border: thin solid #454545;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  background-color: white;
 }
 
 .run-name{
@@ -197,13 +195,20 @@ body{
 }
 
 .run-bottom-portion{
-  border: thin solid #454545;
-  border-top: none;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top: thin solid #ABABAB;
   min-height: 70px;
 }
 
 .instructionsLink{
 	color: white;
+  background-color: white;
 }
+
+.run-container{
+  box-shadow: 10px 10px 19px 0px #ababab;
+  padding: 0px 0px;
+}
+
+.name-header, .description-header, .file-download-header{
+  font-size: 25px;
+	}

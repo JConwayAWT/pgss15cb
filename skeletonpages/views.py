@@ -53,10 +53,15 @@ def about_us(request):
   context = {'active_tab': '#about_us-nav'}
   return render_to_response('skeletonpages/about_us.html', context, RequestContext(request))
 
+def del_simulation(request, simulation_id):
+  simulation = AlgorithmRun.objects.get(pk = simulation_id)
+  simulation.delete()
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
 
-  output_file = open(simulation.output_file.path, "r")
+  output_file = simulation.output_file
   first_line = output_file.readline()
 
   list_of_lists = []
@@ -112,7 +117,7 @@ def create_simulation_ajax(request):
     request.user.userprofile.algorithm_runs.add(new_algorithm_run)
     request.user.userprofile.save()
 
-    output_file = open(new_algorithm_run.output_file.path, "r")
+    output_file = new_algorithm_run.output_file
     first_line = output_file.readline()
 
     list_of_lists = []
@@ -128,7 +133,11 @@ def create_simulation_ajax(request):
     for sublist in list_of_lists:
       dictionary.update( { sublist[0]: sublist[1:] } )
 
-    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary)}
+    keys = []
+    for sublist in list_of_lists:
+      keys.append(sublist[0])
+
+    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary), 'variable_names': keys}
 
     return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
 
@@ -148,7 +157,7 @@ def create_simulation(request):
     request.user.userprofile.algorithm_runs.add(new_algorithm_run)
     request.user.userprofile.save()
 
-    output_file = open(new_algorithm_run.output_file.path, "r")
+    output_file = new_algorithm_run.output_file
     first_line = output_file.readline()
 
     list_of_lists = []

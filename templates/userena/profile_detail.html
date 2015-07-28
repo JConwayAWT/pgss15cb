@@ -59,12 +59,14 @@
 <div class="col-lg-10 col-lg-offset-1 pre-scrollable">
 {% for run in profile.algorithm_runs.all %}
   {% ifequal forloop.counter0|modulo:3 0 %}
-    <div class="row" style="margin-left: 7.5%; margin-right: 7.5%">
+    <div class="row" style="margin-left: 7.5%; margin-right: 7.5%; padding-bottom: 35px">
   {% endifequal %}
     <div class="col-md-4">
-      <div class="run-top-portion">
+      <div class="run-container">
+        <div class="run-top-portion">
           <div class="run-name text-center">
             <a href="/skeletonpages/simulations/{{run.id}}/show/" class="run-name"> {{ run.name }}</a>
+            <a href="/skeletonpages/simulations/{{run.id}}/delete/" class="run-name" style="position:relative;float:right;color:red;padding-right:5px;font-size:13px"> X</a>
           </div>
         </div>
         <div class="run-bottom-portion">
@@ -74,6 +76,7 @@
           </div>
         </div>
       </div>
+    </div>
 
   {% if forloop.counter0|modulo:3 == 2 or forloop.last %}
     </div>

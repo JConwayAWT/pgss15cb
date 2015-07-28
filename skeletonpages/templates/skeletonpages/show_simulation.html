@@ -9,14 +9,14 @@
 </div>
 
 <div class="row">
-  <div class="col-md-5 col-md-offset-1">
+  <div class="col-md-2 col-md-offset-3">
     <div class="name-header">
       <b>Name:
       </b>
     </div>
     <div class="name-text">{{ simulation.name }}</div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-2">
     <div class="description-header">
       <b>Description:</b>
     </div>
@@ -26,95 +26,69 @@
       {{ simulation.description }}
     </div>
   </div>
-</div>
-
-<br><hr><br>
-
-<div class="row col-lg-12" align="center">
-  <h3>2-D Scatter Plot:</h3>
-</div>
-
-<div class="row col-lg-6" align="center" style="float:left">
-  <h4> Select X Axis Variable:</h4>
-  <div class="radio">
-  {% for name in variable_names %}
-    {% if forloop.first %}
-      <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" checked data-varkey="{{name}}"> {{name}}
-      <br>
-    {% else %}
-      <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}"> {{name}}
-      <br>
-    <!-- <script>
-      $(".axis-checkbox-x").change(function(){
-        alert("something got checked or unchecked");
-      })
-    </script> -->
-    {% endif %}
-  {% endfor %}
+  <div class="col-md-2">
+    <div class="file-download-header">
+      <b>Output:</b>
+    </div>
+    <div class="file-download-text">
+      <a href="{{ simulation.output_file.url }}">
+        <button href="{{ simulation.output_file.url }}" class="btn btn-success">Download as CSV</button>
+      </a>
+    </div>
   </div>
 </div>
 
-<div class="row col-lg-6" align="center">
-  <h4> Select Y Axis Variable:</h4>
-  {% for name in variable_names %}
-    {% if forloop.last %}
-      <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
-      <br>
-    {% else %}
-      <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
-      <br>
-      <!-- <script>
-        $(".axis-checkbox-x").change(function(){
-          alert("something got checked or unchecked");
-        })
-      </script> -->
-      {% endif %}
-    {% endfor %}
-</div>
+<hr>
 
-<div class="row col-lg-6 x" align="center">
-  <fieldset class="checkboxFieldsetx" class="col-lg-6"></fieldset>
-</div>
-
-
-<div class="row col-lg-6 y" align="center">
-  <fieldset class="checkboxFieldsety" class="col-lg-6"></fieldset>
-  <br>
-  <style>
-    .checkboxFieldsetx {
-        width: 250px;
-      }
-    .checkboxFieldsetx .checkboxx{
-        float: left;
-        width: 50px;
-    }
-    .checkboxFieldsety {
-        width: 250px;
-      }
-    .checkboxFieldsety .checkboxx{
-        float: left;
-        width: 50px;
-    }
-    .box{
-        float: left;
-    }
-  </style>
+<div class="row col-lg-12" align="center">
+  <h3>2D Plot:</h3>
 </div>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-3 col-md-offset-3">
+    <h4> Select X Axis Variable:</h4>
+    <div class="radio">
+    {% for name in variable_names %}
+      {% if forloop.first %}
+        <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" checked data-varkey="{{name}}"> {{name}}
+        <br>
+      {% else %}
+        <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}"> {{name}}
+        <br>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-3">
+    <h4> Select Y Axis Variable:</h4>
+    {% for name in variable_names %}
+      {% if forloop.last %}
+        <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
+        <br>
+      {% else %}
+        <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
+        <br>
+        {% endif %}
+      {% endfor %}
+    </div>
+</div>
+
+<br><br>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
     <div class="text-center">
       <div id="myChart"></div>
     </div>
   </div>
 </div>
 
-<br><hr><br>
+<br><br><br><br>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
     <div class="text-center">
-      <h3>3-D Scatter Plot:</h3>
+      <h3>3D Plot:</h3>
       <div id="myChart3d"></div>
     </div>
   </div>
