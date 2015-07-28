@@ -40,6 +40,13 @@
             </select>
             <span class="helptext">Designates who can view your profile.</span>
           </p>
+          <p style="display: none">
+            <select multiple="multiple" id="id_algorithm_runs" name="algorithm_runs">
+              {% for run in profile.algorithm_runs.all %}
+                <option value="{{ run.id }}" selected="selected">{{ run.name }}</option>
+              {% endfor %}
+            </select>
+          </p>
           <p class="form-box">
             <input placeholder="Organization" class="required form-control-pad" id="id_organization" maxlength="255" name="organization" type="text" value="{{profile.organization}}"/>
           </p>
