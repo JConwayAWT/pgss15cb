@@ -28,6 +28,12 @@
   </div>
 </div>
 
+<br><hr><br>
+
+<div class="row col-lg-12" align="center">
+  <h3>2-D Scatter Plot:</h3>
+</div>
+
 <div class="row col-lg-6" align="center" style="float:left">
   <h4> Select X Axis Variable:</h4>
   <div class="radio">
@@ -67,44 +73,34 @@
 </div>
 
 <div class="row col-lg-6 x" align="center">
-  <fieldset class="checkboxFieldsetx" class="col-lg-6">
-
-  </fieldset>
+  <fieldset class="checkboxFieldsetx" class="col-lg-6"></fieldset>
 </div>
 
 
 <div class="row col-lg-6 y" align="center">
-  <fieldset class="checkboxFieldsety" class="col-lg-6">
-
-  </fieldset>
-
+  <fieldset class="checkboxFieldsety" class="col-lg-6"></fieldset>
+  <br>
   <style>
-  .checkboxFieldsetx {
-      width: 250px;
-
-
+    .checkboxFieldsetx {
+        width: 250px;
+      }
+    .checkboxFieldsetx .checkboxx{
+        float: left;
+        width: 50px;
     }
-  .checkboxFieldsetx .checkboxx{
-      float: left;
-      width: 50px;
-  }
-  .checkboxFieldsety {
-      width: 250px;
-
-
+    .checkboxFieldsety {
+        width: 250px;
+      }
+    .checkboxFieldsety .checkboxx{
+        float: left;
+        width: 50px;
     }
-  .checkboxFieldsety .checkboxx{
-      float: left;
-      width: 50px;
-  }
-  .box{
-      float: left;
-  }
+    .box{
+        float: left;
+    }
   </style>
 </div>
 
-
-<br><br><br>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="text-center">
@@ -113,15 +109,23 @@
   </div>
 </div>
 
+<br><hr><br>
+
 <div class="row">
-  <div id="data" class="col-md-4 col-md-offset-1 pre-scrollable" align="center">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="text-center">
+      <h3>3-D Scatter Plot:</h3>
+      <div id="myChart3d"></div>
+    </div>
   </div>
+</div>
 
 <br><br><br><br><br><br>
 
 <script>
   $(document).ready(function(){
     var mychart = document.getElementById("myChart");
+    var mychart3d = document.getElementById("myChart3d");
     window.scireact = {}
     window.scireact.simulation_values = {{ simulation_values }};
 
@@ -238,6 +242,49 @@
       Plotly.relayout(mychart, update)
       $(".modebar-btn[data-title='Autoscale']")[0].click()
     });
+
+    zVal = keys[0]
+    var data3d = [{
+      x: window.scireact.simulation_values["R"],
+      y: window.scireact.simulation_values["W"],
+      z: window.scireact.simulation_values["Time"],
+      type: "scatter3d"
+    }];
+    var layout3d = {
+      title: yVal + " vs " + zVal + " over " + xVal, 
+      xaxis: {
+        title: xVal, 
+        titlefont: {
+          family: "Courier New, monospace", 
+          size: 18,
+          color: "#7f7f7f"
+        },
+        autorange: true,
+        zeroline: true
+      },
+      yaxis: {
+        title: yVal, 
+        titlefont: {
+          family: "Courier New, monospace", 
+          size: 18, 
+          color: "#7f7f7f"
+        },
+        autorange: true,
+        zeroline: true
+      },
+      zaxis: {
+        title: zVal, 
+        titlefont: {
+          family: "Courier New, monospace", 
+          size: 18, 
+          color: "#7f7f7f"
+        },
+        autorange: true,
+        zeroline: true
+      }
+    };
+    Plotly.plot(myChart3d, data3d, layout3d);
+
   });
 </script>
 
