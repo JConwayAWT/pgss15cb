@@ -118,25 +118,26 @@
 
     });
 
-    $("#validate").click(function(){
-      var file = $("#id_input_file").prop("files")[0];
+    $("#id_input_file").change(function(){
       r = new FileReader();
       r.onload = function (e) { 
         var contents = e.target.result;
         $("#file_output").text(contents);
       };
+      var file = $("#id_input_file").prop("files")[0];
       r.readAsText(file);
+    })
+
+    $("#validate").click(function(){
       var name = $("#simulation_name").val();
       var desc = $("#simulation_description").val();
       var str = $("#file_output").val();
-      alert(str);
       var validate = 1;     
 
       $.ajax({
         url: '/skeletonpages/simulations/create/ajax',
         type: 'GET',
-        data: {name: name, description: desc, validate: validate, str: str},
-        processData: false
+        data: {name: name, description: desc, validate: validate, str: str}
       })
       .done(function() {
         alert("HELLO");

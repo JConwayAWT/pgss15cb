@@ -87,6 +87,8 @@ def new_simulation(request):
                             context_instance = RequestContext(request))
 
 def create_simulation_ajax(request):
+  import ipdb
+  ipdb.set_trace()
   if request.GET:
     print request.GET
     """try:
