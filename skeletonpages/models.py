@@ -23,7 +23,6 @@ class AlgorithmRun(models.Model):
   output_file = models.FileField(upload_to = "documents/output/%Y/%m/%d", null = True, blank = True)
   input_text = models.CharField(max_length = 8192, null = True, blank = True, verbose_name = "Input Text")
   output_text = models.CharField(max_length = 32768, null = True, blank = True, verbose_name = "Output Text")
-
   def __unicode__(self):
     return "{}".format(self.name[:30] or self.description[:30] or "Unnamed Algorithm Run")
 

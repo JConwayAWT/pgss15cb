@@ -11,6 +11,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from random import random
 import json
+import pdb
 from django.utils.safestring import mark_safe
 
 
@@ -85,8 +86,10 @@ def new_simulation(request):
                             context_instance = RequestContext(request))
 
 def create_simulation_ajax(request):
-  # import ipdb
-  # ipdb.set_trace()
+  print request.POST
+  """if 'validate' in request.POST:
+    return json.dumps('hello!!!!')"""
+
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
     file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
