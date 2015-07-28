@@ -31,7 +31,15 @@
           <br>
           <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
           <br><br>
-          <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button</p>
+          <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button></p>
+        </form>
+        <form action="{% url 'validate_simulation_ajax' %}" method="post"
+        enctype="multipart/form-data">
+          <div id="csrf">
+            {% csrf_token %}
+          </div>
+          <p><button value="Validate Data" class="btn btn-primary btn-lg"
+          id="validate">Validate</button></p>
         </form>
 
 
@@ -75,7 +83,9 @@
 <script>
 
   $(document).ready(function(){
+    //$("#submitted").hide();
     $("#submitted").click(function(){
+      alert("hello");
       $(".before-processing").toggle();
       $(".while-processing").toggle();
       var file = $("#id_input_file").prop("files")[0];
@@ -114,6 +124,35 @@
       
 
     });
+    $("#validate").click(function(){
+      var file = $("#id_input_file").prop("files")[0];
+      var name = $("#simulation_name").val();
+      var desc = $("#simulation_description").val();
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", $("#csrf").find("input").prop("value"));
+          }
+        }
+      });
+      
+
+      $.ajax({
+        url: '/skeletonpages/validate',
+        type: 'POST',
+        data: {name: name, description: desc, file: file},
+        processData: false,
+        beforeSend: function(xhr, settings){
+          console.log("before send...");
+          $.ajaxSettings.beforeSend(xhr, settings);
+        }
+      });
+      
+
+    });
+
   });
 
 </script>
