@@ -31,7 +31,7 @@ class AlgorithmRun(models.Model):
 class UserProfile(UserenaBaseProfile):
   user = models.OneToOneField(User)
 
-  algorithm_runs = models.ManyToManyField(AlgorithmRun)
+  algorithm_runs = models.ManyToManyField(AlgorithmRun, null = True, blank = True)
 
   organization = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Organization Name")
   scientific_field = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Field")

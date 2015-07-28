@@ -20,55 +20,95 @@
     <div class="description-header">
       <b>Description:</b>
     </div>
+
+
     <div class="description-text">
       {{ simulation.description }}
     </div>
   </div>
 </div>
 
+<div class="row col-lg-6" align="center" style="float:left">
+  <h4> Select X Axis Variable:</h4>
+  <div class="radio">
+  {% for name in variable_names %}
+    {% if forloop.first %}
+      <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" checked data-varkey="{{name}}"> {{name}}
+      <br>
+    {% else %}
+      <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}"> {{name}}
+      <br>
+    <!-- <script>
+      $(".axis-checkbox-x").change(function(){
+        alert("something got checked or unchecked");
+      })
+    </script> -->
+    {% endif %}
+  {% endfor %}
+  </div>
+</div>
+
+<div class="row col-lg-6" align="center">
+  <h4> Select Y Axis Variable:</h4>
+  {% for name in variable_names %}
+    {% if forloop.last %}
+      <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
+      <br>
+    {% else %}
+      <input type="radio" name="optionsRadiosY" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
+      <br>
+      <!-- <script>
+        $(".axis-checkbox-x").change(function(){
+          alert("something got checked or unchecked");
+        })
+      </script> -->
+      {% endif %}
+    {% endfor %}
+</div>
+
+<div class="row col-lg-6 x" align="center">
+  <fieldset class="checkboxFieldsetx" class="col-lg-6">
+
+  </fieldset>
+</div>
+
+
+<div class="row col-lg-6 y" align="center">
+  <fieldset class="checkboxFieldsety" class="col-lg-6">
+
+  </fieldset>
+
+  <style>
+  .checkboxFieldsetx {
+      width: 250px;
+
+
+    }
+  .checkboxFieldsetx .checkboxx{
+      float: left;
+      width: 50px;
+  }
+  .checkboxFieldsety {
+      width: 250px;
+
+
+    }
+  .checkboxFieldsety .checkboxx{
+      float: left;
+      width: 50px;
+  }
+  .box{
+      float: left;
+  }
+  </style>
+</div>
+
+
 <br><br><br>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="text-center">
-      <h1 style="font-size: 80px">This is the place where beautiful graphs will go.</h1>
-      <div id="myDiv"></div>
-      <script>
-        var simulation_values = {{ simulation_values }}
-        var keys = []
-        for (var key in simulation_values) {
-          keys.push(key)
-        }
-        console.log(simulation_values)
-        console.log(keys)
-        var trace1 = {
-            x: simulation_values.R,
-            y: simulation_values.W, 
-            name: "Name of Trace 1", 
-            type: "scatter"
-          };
-          var data = [trace1];
-          var layout = {
-            title: "Plot Title", 
-            xaxis: {
-              title: "Rabbits", 
-              titlefont: {
-                family: "Courier New, monospace", 
-                size: 18, 
-                color: "#7f7f7f"
-              }
-            }, 
-            yaxis: {
-              title: "Wolves", 
-              titlefont: {
-                family: "Courier New, monospace", 
-                size: 18, 
-                color: "#7f7f7f"
-              }
-            }
-          };
-          Plotly.plot("myDiv", data, layout);
-      </script>
-
+      <div id="myChart"></div>
     </div>
   </div>
 </div>
@@ -80,18 +120,128 @@
 <br><br><br><br><br><br>
 
 <script>
-
   $(document).ready(function(){
-    var output_values = {{ simulation_values }};
+    var simulation_values = {{ simulation_values }};
+
+    var keys = []
+    for (key in simulation_values) {
+      if (simulation_values.hasOwnProperty(key)) {
+        keys.push(key);
+      }
+    }
+
+    xVal = keys[2]
+    yVal = keys[1]
+
+    var trace1 = {
+      x: simulation_values[xVal],
+      y: simulation_values[yVal], 
+      type: "scatter"
+    }
+    var data = [trace1];
+    var layout = {
+      title: yVal + " vs " + xVal, 
+      xaxis: {
+        title: xVal, 
+        titlefont: {
+          family: "Courier New, monospace", 
+          size: 18,
+          color: "#7f7f7f"
+        }
+      }, 
+      yaxis: {
+        title: yVal, 
+        titlefont: {
+          family: "Courier New, monospace", 
+          size: 18, 
+          color: "#7f7f7f"
+        }
+      }
+    };
+    Plotly.plot("myChart", data, layout);
+
+    $(".axis-checkbox-x").change(function(){
+      var newX = $(this).data().varkey;
+
+      if (keys.indexOf(newX) != -1)
+        xVal = newX
+
+      alert(xVal)
+
+      var trace1 = {
+        x: simulation_values[xVal],
+        y: simulation_values[yVal], 
+        type: "scatter"
+      }
+      var data = [trace1];
+      var layout = {
+        title: yVal + " vs " + xVal, 
+        xaxis: {
+          title: xVal, 
+          titlefont: {
+            family: "Courier New, monospace", 
+            size: 18, 
+            color: "#7f7f7f"
+          }
+        }, 
+        yaxis: {
+          title: yVal, 
+          titlefont: {
+            family: "Courier New, monospace", 
+            size: 18, 
+            color: "#7f7f7f"
+          }
+        }
+      };
+      Plotly.plot("myChart", data, layout);
+    });
+
+    $(".axis-checkbox-y").change(function(){
+      var newY = $(this).data().varkey;
+
+      if (keys.indexOf(newY) != -1)
+        yVal = newY
+
+      alert(yVal)
+
+      var trace1 = {
+        x: simulation_values[xVal],
+        y: simulation_values[yVal], 
+        type: "scatter"
+      }
+      var data = [trace1];
+      var layout = {
+        title: yVal + " vs " + xVal, 
+        xaxis: {
+          title: xVal, 
+          titlefont: {
+            family: "Courier New, monospace", 
+            size: 18, 
+            color: "#7f7f7f"
+          }
+        }, 
+        yaxis: {
+          title: yVal, 
+          titlefont: {
+            family: "Courier New, monospace", 
+            size: 18, 
+            color: "#7f7f7f"
+          }
+        }
+      };
+      Plotly.plot("myChart", data, layout);
+    });
+
+
+    console.log(keys)
+    console.log(simulation_values[keys[0]])
 
     // now access stuff like...
     // output_values.R
     // output_values.Time
     // output_values.W
     // ....
-
   });
-
 </script>
 
 {% include "common/_footer.html" %}
