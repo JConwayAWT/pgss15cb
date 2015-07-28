@@ -14,6 +14,7 @@ import json
 import pdb
 from django.utils.safestring import mark_safe
 import Parser
+from StringIO import StringIO
 
 
 def index(request):
@@ -87,19 +88,20 @@ def new_simulation(request):
                             context_instance = RequestContext(request))
 
 def create_simulation_ajax(request):
-  import ipdb
-  ipdb.set_trace()
   if request.GET:
-    print request.GET
-    """try:
-      Parser()"""
-    return HttpResponse("1")
+    try:
+      in_file = File(open("./pgss15compbio/media/temp.txt", "w+"))
+      in_file.write(request.GET['str'])
+      Parser.Parser().get_model(in_file, 'hello')
+      return HttpResponse("1")
+    except ValueError:
+      return HttpResponse(status=412)
   print request.POST
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
     file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
     out_file = File(open(file_name, "w+"))
-    p = Parser()
+    p = Parser.Parser()
     model = p.get_model(request.FILES['input_file'], out_file)
     model.iterate()
     new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
