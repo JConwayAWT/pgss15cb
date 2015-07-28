@@ -173,3 +173,22 @@ body{
 .ghost-btn:focus {
   outline: none;
 }
+
+.run-top-portion{
+  border: thin solid #454545;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.run-name{
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.run-bottom-portion{
+  border: thin solid #454545;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  min-height: 70px;
+}

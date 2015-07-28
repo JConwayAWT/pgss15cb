@@ -84,6 +84,44 @@ def new_simulation(request):
                             {'form': form}, 
                             context_instance = RequestContext(request))
 
+def create_simulation_ajax(request):
+  # import ipdb
+  # ipdb.set_trace()
+  form = AlgorithmRunForm(request.POST, request.FILES)
+  if form.is_valid():
+    file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
+    out_file = File(open(file_name, "w+"))
+    p = Parser()
+    model = p.get_model(request.FILES['input_file'], out_file)
+    model.iterate()
+    new_algorithm_run = AlgorithmRun(input_file = request.FILES['input_file'],
+      output_file = out_file, name=request.POST['name'],
+      description = request.POST['description'])
+
+    new_algorithm_run.save()
+    request.user.userprofile.algorithm_runs.add(new_algorithm_run)
+    request.user.userprofile.save()
+
+    output_file = open(new_algorithm_run.output_file.path, "r")
+    first_line = output_file.readline()
+
+    list_of_lists = []
+    for variable_name in first_line.strip().split(","):
+      list_of_lists.append([variable_name])
+
+    for line in output_file.readlines():
+      split_line = line.split(",")
+      for index, value in enumerate(split_line):
+        list_of_lists[index].append(float(value.rstrip()))
+
+    dictionary = {}
+    for sublist in list_of_lists:
+      dictionary.update( { sublist[0]: sublist[1:] } )
+
+    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary)}
+
+    return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
+
 def create_simulation(request):
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
