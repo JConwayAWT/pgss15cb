@@ -164,6 +164,7 @@
       }
     };
     Plotly.plot(mychart, data, layout);
+    $(".modebar-btn[data-title='Autoscale']")[0].click()
 
     $(".axis-checkbox-x").change(function(){
       var newX = $(this).data().varkey;
@@ -198,7 +199,7 @@
         }
       }
       Plotly.relayout(mychart, update)
-
+      $(".modebar-btn[data-title='Autoscale']")[0].click()
 
     });
 
@@ -235,6 +236,7 @@
         }
       }
       Plotly.relayout(mychart, update)
+      $(".modebar-btn[data-title='Autoscale']")[0].click()
     });
   });
 </script>
