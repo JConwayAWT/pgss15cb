@@ -2,6 +2,7 @@
 import random as rng
 import math
 import csv
+import os
 
 class Model(object):
 
@@ -73,5 +74,5 @@ class Model(object):
                 for r in reagents:
                     reagentCounts.append(r.count)
                 fileWriter.writerow([time] + reagentCounts)
-            if i % 1000 == 0:
-                print [time] + reagentCounts
+            # if i % 1000 == 0:
+            # print [time] + reagentCounts
