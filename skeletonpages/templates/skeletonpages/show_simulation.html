@@ -193,7 +193,7 @@
           }
         }
       };
-      Plotly.plot("myChart", data, layout);
+      Plotly.redraw("myChart", data, layout);
     });
 
     $(".axis-checkbox-y").change(function(){
@@ -229,7 +229,8 @@
           }
         }
       };
-      Plotly.plot("myChart", data, layout);
+      $("#myChart").data[0] = []
+      Plotly.redraw("myChart");
     });
 
 
