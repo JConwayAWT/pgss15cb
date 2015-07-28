@@ -15,7 +15,6 @@ import os
 import dj_database_url
 
 ON_HEROKU = os.environ.get('ON_HEROKU')
-ON_HEROKU = False
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -47,6 +46,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'accounts',
+    'storages'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -164,3 +164,10 @@ AUTH_PROFILE_MODULE = 'skeletonpages.UserProfile'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+if ON_HEROKU:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_KEY")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET")
+    AWS_STORAGE_BUCKET_NAME = "scireact"
+    BOTO_S3_BUCKET = "scireact"

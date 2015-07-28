@@ -28,17 +28,17 @@
           <div id="csrf">
             {% csrf_token %}
           </div>
-          <br>
           <p>{{ form.non_field_errors }}</p>
-          <p class="text-center" style="margin-left: 25%">
+          <p class="text-center">
               {{ form.input_file.errors }} <!-- id = id_input_file -->
-              {{ form.input_file }}
+              <input class="btn btn-default" id="id_input_file" name="input_file" type="file" style="width:  100%;">
           <br>
           <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
           <br>
           <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
-          <textarea readonly placeholder="File Output" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="4"></textarea>
-          <br><br>
+          <br>
+          <textarea readonly placeholder="REACT File Contents" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="7"></textarea>
+          <br>
           <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button></p>
         </form>
           <p><button value="Validate Data" class="btn btn-primary btn-lg"

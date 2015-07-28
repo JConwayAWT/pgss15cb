@@ -61,7 +61,7 @@ def del_simulation(request, simulation_id):
 def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
 
-  output_file = open(simulation.output_file.path, "r")
+  output_file = simulation.output_file
   first_line = output_file.readline()
 
   list_of_lists = []
@@ -117,7 +117,7 @@ def create_simulation_ajax(request):
     request.user.userprofile.algorithm_runs.add(new_algorithm_run)
     request.user.userprofile.save()
 
-    output_file = open(new_algorithm_run.output_file.path, "r")
+    output_file = new_algorithm_run.output_file
     first_line = output_file.readline()
 
     list_of_lists = []
@@ -157,7 +157,7 @@ def create_simulation(request):
     request.user.userprofile.algorithm_runs.add(new_algorithm_run)
     request.user.userprofile.save()
 
-    output_file = open(new_algorithm_run.output_file.path, "r")
+    output_file = new_algorithm_run.output_file
     first_line = output_file.readline()
 
     list_of_lists = []

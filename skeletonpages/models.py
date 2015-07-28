@@ -7,6 +7,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, post_init
 from django.utils.translation import ugettext as _
 from userena.models import UserenaBaseProfile
+from time import strftime
 
 class DemoObject(models.Model):
   object_name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Object Name")
@@ -17,10 +18,14 @@ class DemoObject(models.Model):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
 class AlgorithmRun(models.Model):
+  def upload_path(self, filename):
+    return strftime("/%Y/%m/%d/%H/%M/{}".format(filename))
+
+
   name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
   description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
-  input_file = models.FileField(upload_to = "documents/%Y/%m/%d", null = True, blank = True)
-  output_file = models.FileField(upload_to = "documents/output/%Y/%m/%d", null = True, blank = True)
+  input_file = models.FileField(upload_to = upload_path, null = True, blank = True)
+  output_file = models.FileField(upload_to = upload_path, null = True, blank = True)
   input_text = models.CharField(max_length = 8192, null = True, blank = True, verbose_name = "Input Text")
   output_text = models.CharField(max_length = 32768, null = True, blank = True, verbose_name = "Output Text")
   def __unicode__(self):
