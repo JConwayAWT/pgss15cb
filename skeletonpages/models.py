@@ -19,7 +19,7 @@ class DemoObject(models.Model):
 
 class AlgorithmRun(models.Model):
   def upload_path(self, filename):
-    return strftime("/%Y/%m/%d/%H/%M/{}".format(filename))
+    return strftime("%Y/%m/%d/%H/%M/{}".format(filename))
 
 
   name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
