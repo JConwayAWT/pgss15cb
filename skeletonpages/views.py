@@ -128,7 +128,11 @@ def create_simulation_ajax(request):
     for sublist in list_of_lists:
       dictionary.update( { sublist[0]: sublist[1:] } )
 
-    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary)}
+    keys = []
+    for sublist in list_of_lists:
+      keys.append(sublist[0])
+
+    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary), 'variable_names': keys}
 
     return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
 

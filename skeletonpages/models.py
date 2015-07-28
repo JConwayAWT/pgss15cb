@@ -24,7 +24,7 @@ class AlgorithmRun(models.Model):
   input_text = models.CharField(max_length = 8192, null = True, blank = True, verbose_name = "Input Text")
   output_text = models.CharField(max_length = 32768, null = True, blank = True, verbose_name = "Output Text")
   def __unicode__(self):
-    return "{}".format(self.name[:30] or self.description[:30] or "Unnamed Algorithm Run")
+    return "{}".format(self.name or "Unnamed Algorithm Run")
 
 
 class UserProfile(UserenaBaseProfile):
