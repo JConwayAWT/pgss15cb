@@ -15,12 +15,17 @@ body{
 	text-align: center;
 }
 
+.profile-detail-first-row{
+	background-image: url("material_background.jpg");
+}
+
 .jumbotron {
-	background-image: url('http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg');
-	background-position: left;
+	background-image: url("material_background.jpg");
+	background-position: center;
+	background-size: 100%;
 	text-align: center;
 
-	padding-bottom: 20px;
+	padding-bottom: 50px;
 }
 
 .jumbotron h1 {
@@ -32,7 +37,7 @@ body{
 }
 
 .jTextTop {
-	padding-top: 20px;
+	padding-top: 0px;
 	color: white;
 }
 
@@ -70,7 +75,7 @@ body{
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;
-	background: url(http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg) no-repeat;
+	background: url("material_background.jpg") no-repeat;
 }
 
 .marketing .col-lg-4 {
@@ -99,12 +104,13 @@ body{
 }
 
 .form-control-pad{
-		border-radius: 0px;
+	border-radius: 0px;
     height: 50px;
     font-size: 24px;
     font-weight: 100;
     font-family: "Roboto", sans-serif;
     width: 100%;
+    padding-left:10px;
 }
 
 .background-image {
@@ -131,14 +137,23 @@ body{
 }
 
 .gauss{
-	font-size: 200px;
+	font-size: 50px;
 	font-weight: bolder;
 	padding: 50px;
-	background-image:url("C:/home/chris/sites/compbio/pgss15cb/pgss15compbio/static");
+	letter-spacing: 20px;
 }
 
 .gauss-row{
-	background-color: white;
+	background-color: whitesmoke;
+}
+
+.gauss-jumbotron {
+	background-image: url("material_background2.png");
+	background-position: center center;
+	background-size: 100%;
+	text-align: center;
+
+	padding-bottom: 50px;
 }
 
 .larger-text{
@@ -211,4 +226,13 @@ body{
 
 .name-header, .description-header, .file-download-header{
   font-size: 25px;
+  color: white;
 	}
+
+.name-text, .description-text {
+	color: white;
+}
+
+.new-simulation-description {
+	color: white;
+}

@@ -33,17 +33,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li id="input-nav"><a href="/skeletonpages/simulations/new/">Input</a></li>
+            <li id="input-nav"><a href="/skeletonpages/simulations/new/">New Simulation</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
               <li><a href="/accounts/{{user.username}}/">My Profile</a></li>
-              <li><a href="/accounts/{{user.username}}/edit">Edit Info</a></li>
+              <li><a href="/accounts/{{user.username}}/edit">Edit Profile</a></li>
               <li id=""><a href="/accounts/signout">Log Out</a></li>
             {% else %}
               <li id=""><a href="/accounts/signin">Log In</a></li>
             {% endif %}
-            <li id="about_us-nav"><a href="/skeletonpages/about_us">About Us</a></li>
+            <li id="about_us-nav"><a href="/skeletonpages/about_us">About</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
