@@ -70,7 +70,11 @@ def show_simulation(request, simulation_id):
   for sublist in list_of_lists:
     dictionary.update( { sublist[0]: sublist[1:] } )
 
-  context = {'simulation': simulation, 'simulation_values': mark_safe(dictionary)}
+  keys = []
+  for sublist in list_of_lists:
+    keys.append(sublist[0])
+
+  context = {'simulation': simulation, 'simulation_values': mark_safe(dictionary), 'variable_names': keys}
 
   return render_to_response('skeletonpages/show_simulation.html', context, RequestContext(request))
 
@@ -112,8 +116,12 @@ def create_simulation(request):
     dictionary = {}
     for sublist in list_of_lists:
       dictionary.update( { sublist[0]: sublist[1:] } )
+      
+    keys = []
+    for sublist in list_of_lists:
+      keys.append(sublist[0])
 
-    context = {'simulation': new_algorithm_run, 'simulation_values': mark_safe(dictionary)}
+    context = {'simulation': simulation, 'simulation_values': mark_safe(dictionary), 'variable_names': keys}
 
 
     return render_to_response('skeletonpages/show_simulation.html',
