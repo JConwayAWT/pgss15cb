@@ -13,5 +13,6 @@ urlpatterns = [
   url(r'^simulations/create/$', views.create_simulation, name="create_simulation"),
   url(r'^simulations/create/ajax$', views.create_simulation_ajax, name="create_simulation_ajax"),
   url(r'^simulations/(?P<simulation_id>\d+)/delete/$', views.del_simulation, name="del_simulation"),
+  url(r'^keep_alive/$', views.keep_alive, name="keep_alive"),
 
 ]

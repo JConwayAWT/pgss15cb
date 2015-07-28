@@ -74,5 +74,5 @@ class Model(object):
                 for r in reagents:
                     reagentCounts.append(r.count)
                 fileWriter.writerow([time] + reagentCounts)
-            # if i % 1000 == 0:
-            # print [time] + reagentCounts
+            if i % 50000 == 0:
+              print [time] + reagentCounts

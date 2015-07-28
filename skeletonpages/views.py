@@ -92,6 +92,9 @@ def new_simulation(request):
                             {'form': form}, 
                             context_instance = RequestContext(request))
 
+def keep_alive(request):
+  return HttpResponse("1");
+
 def create_simulation_ajax(request):
   if request.GET:
     try:
