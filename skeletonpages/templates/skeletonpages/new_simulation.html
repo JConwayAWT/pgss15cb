@@ -11,12 +11,20 @@
       </div>
     </div>
   </div>
-
+  <br>
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <div class="text-center">
 
         <form action="{% url 'create_simulation_ajax' %}" method="post" enctype="multipart/form-data">
+          <div id="myAlert" class="alert alert-danger">
+             <a href="#" class="close" data-dismiss="alert">&times;</a>
+             Your input file is invalid - please check and re-upload.
+          </div>
+          <div id="successAlert" class="alert alert-success">
+             <a href="#" class="close" data-dismiss="alert">&times;</a>
+             Your input file is valid - run simulation now.
+          </div>
           <div id="csrf">
             {% csrf_token %}
           </div>
@@ -25,16 +33,13 @@
           <p class="text-center" style="margin-left: 25%">
               {{ form.input_file.errors }} <!-- id = id_input_file -->
               {{ form.input_file }}
+          <br>
           <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
           <br>
           <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
           <textarea readonly placeholder="File Output" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="4"></textarea>
           <br><br>
           <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button></p>
-          <div id="myAlert" class="alert alert-danger">
-             <a href="#" class="close" data-dismiss="alert">&times;</a>
-             Your input file is invalid - please check and re-upload.
-          </div>
         </form>
           <p><button value="Validate Data" class="btn btn-primary btn-lg"
           id="validate">Validate</button></p>
@@ -82,6 +87,7 @@
   $(document).ready(function(){
     $("#submitted").hide();
     $("#myAlert").hide();
+    $("#successAlert").hide();
     $("#submitted").click(function(){
       $(".before-processing").toggle();
       $(".while-processing").toggle();
@@ -122,6 +128,10 @@
     });
 
     $("#id_input_file").change(function(){
+      $("#myAlert").hide();
+      $("#successAlert").hide();
+      $("#submitted").hide();
+      $("#validate").show();
       r = new FileReader();
       r.onload = function (e) { 
         var contents = e.target.result;
@@ -145,6 +155,7 @@
       .done(function() {
         $("#submitted").show();
         $("#validate").hide();
+        $("#successAlert").show();
 
       })
       .fail(function() {
