@@ -53,6 +53,11 @@ def about_us(request):
   context = {'active_tab': '#about_us-nav'}
   return render_to_response('skeletonpages/about_us.html', context, RequestContext(request))
 
+def del_simulation(request, simulation_id):
+  simulation = AlgorithmRun.objects.get(pk = simulation_id)
+  simulation.delete()
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
 
