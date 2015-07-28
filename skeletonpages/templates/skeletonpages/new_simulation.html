@@ -28,13 +28,16 @@
           <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
           <br>
           <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
-          <textarea placeholder="File Output" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="4"></textarea>
+          <textarea readonly placeholder="File Output" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="4"></textarea>
           <br><br>
           <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button></p>
+          <div id="myAlert" class="alert alert-danger">
+             <a href="#" class="close" data-dismiss="alert">&times;</a>
+             Your input file is invalid - please check and re-upload.
+          </div>
         </form>
           <p><button value="Validate Data" class="btn btn-primary btn-lg"
           id="validate">Validate</button></p>
-
 
 
       </div>
@@ -78,8 +81,8 @@
 
   $(document).ready(function(){
     $("#submitted").hide();
+    $("#myAlert").hide();
     $("#submitted").click(function(){
-      // alert("hello");
       $(".before-processing").toggle();
       $(".while-processing").toggle();
       var file = $("#id_input_file").prop("files")[0];
@@ -118,31 +121,34 @@
 
     });
 
-    $("#validate").click(function(){
-      var file = $("#id_input_file").prop("files")[0];
+    $("#id_input_file").change(function(){
       r = new FileReader();
       r.onload = function (e) { 
         var contents = e.target.result;
         $("#file_output").text(contents);
       };
+      var file = $("#id_input_file").prop("files")[0];
       r.readAsText(file);
+    })
+
+    $("#validate").click(function(){
       var name = $("#simulation_name").val();
       var desc = $("#simulation_description").val();
       var str = $("#file_output").val();
-      alert(str);
       var validate = 1;     
 
       $.ajax({
         url: '/skeletonpages/simulations/create/ajax',
         type: 'GET',
-        data: {name: name, description: desc, validate: validate, str: str},
-        processData: false
+        data: {name: name, description: desc, validate: validate, str: str}
       })
       .done(function() {
-        alert("HELLO");
         $("#submitted").show();
         $("#validate").hide();
 
+      })
+      .fail(function() {
+        $("#myAlert").show();
       })
       
 
