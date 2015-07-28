@@ -16,20 +16,25 @@
     <div class="col-md-4 col-md-offset-4">
       <div class="text-center">
 
-        <!-- <form action="{% url 'create_simulation_ajax' %}" method="post" enctype="multipart/form-data"> -->
+        <form action="{% url 'create_simulation_ajax' %}" method="post" enctype="multipart/form-data">
           <div id="csrf">
             {% csrf_token %}
           </div>
           <br>
-          <input type="file" id="id_input_file"/>
+          <p>{{ form.non_field_errors }}</p>
+          <p class="text-center" style="margin-left: 25%">
+              {{ form.input_file.errors }} <!-- id = id_input_file -->
+              {{ form.input_file }}
           <input placeholder="Name" class="form-control" id="simulation_name" name="name" type="text" />
           <br>
           <textarea placeholder="Description" class="form-control" id="simulation_description" name="description" type="textarea" rows="4"></textarea>
+          <textarea placeholder="File Output" class="form-control" id="file_output" name="FileOutput" type="textarea" rows="4"></textarea>
           <br><br>
           <p><button value="Upload" class="btn btn-primary btn-lg" id="submitted">Start Simulation</button></p>
+        </form>
           <p><button value="Validate Data" class="btn btn-primary btn-lg"
           id="validate">Validate</button></p>
-        <!-- </form> -->
+
 
 
       </div>
@@ -72,7 +77,7 @@
 <script>
 
   $(document).ready(function(){
-    //$("#submitted").hide();
+    $("#submitted").hide();
     $("#submitted").click(function(){
       // alert("hello");
       $(".before-processing").toggle();
@@ -80,7 +85,6 @@
       var file = $("#id_input_file").prop("files")[0];
       var name = $("#simulation_name").val();
       var desc = $("#simulation_description").val();
-      var validate = 0;
       
       $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -94,7 +98,7 @@
       $.ajax({
         url: '/skeletonpages/simulations/create/ajax',
         type: 'POST',
-        data: {name: name, description: desc},
+        data: {name: name, description: desc, file: file},
         processData: false,
         beforeSend: function(xhr, settings){
           console.log("before send...");
@@ -116,29 +120,30 @@
 
     $("#validate").click(function(){
       var file = $("#id_input_file").prop("files")[0];
+      r = new FileReader();
+      r.onload = function (e) { 
+        var contents = e.target.result;
+        $("#file_output").text(contents);
+      };
+      r.readAsText(file);
       var name = $("#simulation_name").val();
       var desc = $("#simulation_description").val();
-      var validate = 1;
-
-      $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-            // Only send the token to relative URLs i.e. locally.
-            xhr.setRequestHeader("X-CSRFToken", $("#csrf").find("input").prop("value"));
-          }
-        }
-      });
-      
+      var str = $("#file_output").val();
+      alert(str);
+      var validate = 1;     
 
       $.ajax({
         url: '/skeletonpages/simulations/create/ajax',
-        type: 'POST',
-        data: {name: name, description: desc, validate: validate},
-        beforeSend: function(xhr, settings){
-          console.log("before send...");
-          $.ajaxSettings.beforeSend(xhr, settings);
-        }
-      });
+        type: 'GET',
+        data: {name: name, description: desc, validate: validate, str: str},
+        processData: false
+      })
+      .done(function() {
+        alert("HELLO");
+        $("#submitted").show();
+        $("#validate").hide();
+
+      })
       
 
     });

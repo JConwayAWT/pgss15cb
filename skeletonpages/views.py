@@ -13,6 +13,7 @@ from random import random
 import json
 import pdb
 from django.utils.safestring import mark_safe
+import Parser
 
 
 def index(request):
@@ -86,10 +87,12 @@ def new_simulation(request):
                             context_instance = RequestContext(request))
 
 def create_simulation_ajax(request):
+  if request.GET:
+    print request.GET
+    """try:
+      Parser()"""
+    return HttpResponse("1")
   print request.POST
-  """if 'validate' in request.POST:
-    return json.dumps('hello!!!!')"""
-
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
     file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
