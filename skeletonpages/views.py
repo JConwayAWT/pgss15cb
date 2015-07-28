@@ -51,12 +51,6 @@ def about_us(request):
   context = {'active_tab': '#about_us-nav'}
   return render_to_response('skeletonpages/about_us.html', context, RequestContext(request))
 
-def validate_simulation_ajax(request):
-  print "HELLOOOO"
-  print request.FILES
-  h = HttpResponseRedirect("../../media/out_file.txt")
-  return h
-
 def show_simulation(request, simulation_id):
   simulation = AlgorithmRun.objects.get(pk = simulation_id)
 
@@ -92,8 +86,10 @@ def new_simulation(request):
                             context_instance = RequestContext(request))
 
 def create_simulation_ajax(request):
-  # import ipdb
-  # ipdb.set_trace()
+  print request.POST
+  """if 'validate' in request.POST:
+    return json.dumps('hello!!!!')"""
+
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
     file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
