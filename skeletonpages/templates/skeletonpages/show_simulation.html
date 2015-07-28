@@ -121,11 +121,13 @@
 
 <script>
   $(document).ready(function(){
-    var simulation_values = {{ simulation_values }};
+    var mychart = document.getElementById("myChart");
+    window.scireact = {}
+    window.scireact.simulation_values = {{ simulation_values }};
 
     var keys = []
-    for (key in simulation_values) {
-      if (simulation_values.hasOwnProperty(key)) {
+    for (key in window.scireact.simulation_values) {
+      if (window.scireact.simulation_values.hasOwnProperty(key)) {
         keys.push(key);
       }
     }
@@ -133,12 +135,11 @@
     xVal = keys[2]
     yVal = keys[1]
 
-    var trace1 = {
-      x: simulation_values[xVal],
-      y: simulation_values[yVal], 
+    var data = [{
+      x: window.scireact.simulation_values[xVal],
+      y: window.scireact.simulation_values[yVal], 
       type: "scatter"
-    }
-    var data = [trace1];
+    }]
     var layout = {
       title: yVal + " vs " + xVal, 
       xaxis: {
@@ -147,7 +148,9 @@
           family: "Courier New, monospace", 
           size: 18,
           color: "#7f7f7f"
-        }
+        },
+        autorange: true,
+        zeroline: true
       }, 
       yaxis: {
         title: yVal, 
@@ -155,10 +158,12 @@
           family: "Courier New, monospace", 
           size: 18, 
           color: "#7f7f7f"
-        }
+        },
+        autorange: true,
+        zeroline: true
       }
     };
-    Plotly.plot("myChart", data, layout);
+    Plotly.plot(mychart, data, layout);
 
     $(".axis-checkbox-x").change(function(){
       var newX = $(this).data().varkey;
@@ -166,23 +171,20 @@
       if (keys.indexOf(newX) != -1)
         xVal = newX
 
-      alert(xVal)
+      mychart.data[0].x = window.scireact.simulation_values[xVal];
+      Plotly.redraw(mychart);
 
-      var trace1 = {
-        x: simulation_values[xVal],
-        y: simulation_values[yVal], 
-        type: "scatter"
-      }
-      var data = [trace1];
-      var layout = {
+      var update = {
         title: yVal + " vs " + xVal, 
         xaxis: {
           title: xVal, 
           titlefont: {
             family: "Courier New, monospace", 
-            size: 18, 
+            size: 18,
             color: "#7f7f7f"
-          }
+          },
+          autorange: true,
+          zeroline: true
         }, 
         yaxis: {
           title: yVal, 
@@ -190,10 +192,14 @@
             family: "Courier New, monospace", 
             size: 18, 
             color: "#7f7f7f"
-          }
+          },
+          autorange: true,
+          zeroline: true
         }
-      };
-      Plotly.redraw("myChart", data, layout);
+      }
+      Plotly.relayout(mychart, update)
+
+
     });
 
     $(".axis-checkbox-y").change(function(){
@@ -202,46 +208,34 @@
       if (keys.indexOf(newY) != -1)
         yVal = newY
 
-      alert(yVal)
+      mychart.data[0].y = window.scireact.simulation_values[yVal];
+      Plotly.redraw(mychart);
 
-      var trace1 = {
-        x: simulation_values[xVal],
-        y: simulation_values[yVal], 
-        type: "scatter"
-      }
-      var data = [trace1];
-      var layout = {
+      var update = {
         title: yVal + " vs " + xVal, 
         xaxis: {
-          title: xVal, 
+          title: xVal,
           titlefont: {
             family: "Courier New, monospace", 
             size: 18, 
             color: "#7f7f7f"
-          }
-        }, 
+          },
+          autorange: true,
+          zeroline: true
+        },
         yaxis: {
-          title: yVal, 
+          title: yVal,
           titlefont: {
             family: "Courier New, monospace", 
             size: 18, 
             color: "#7f7f7f"
-          }
+          },
+          autorange: true,
+          zeroline: true
         }
-      };
-      $("#myChart").data[0] = []
-      Plotly.redraw("myChart");
+      }
+      Plotly.relayout(mychart, update)
     });
-
-
-    console.log(keys)
-    console.log(simulation_values[keys[0]])
-
-    // now access stuff like...
-    // output_values.R
-    // output_values.Time
-    // output_values.W
-    // ....
   });
 </script>
 
