@@ -16,14 +16,24 @@ body{
 }
 
 .jumbotron {
-	/*background-image: url(https://c1.staticflickr.com/3/2883/11344901275_be392a33c5_z.jpg);*/
+	background-image: url('http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg');
 	background-position: left;
 	text-align: center;
+
 	padding-bottom: 20px;
+}
+
+.jumbotron h1 {
+  color: white;
+}
+
+.tronText {
+	color: white;
 }
 
 .jTextTop {
 	padding-top: 20px;
+	color: white;
 }
 
 
@@ -60,7 +70,7 @@ body{
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;
-	background: url(https://c1.staticflickr.com/3/2883/11344901275_be392a33c5_z.jpg) no-repeat;
+	background: url(http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg) no-repeat;
 }
 
 .marketing .col-lg-4 {
@@ -124,6 +134,7 @@ body{
 	font-size: 200px;
 	font-weight: bolder;
 	padding: 50px;
+	background-image:url("C:/home/chris/sites/compbio/pgss15cb/pgss15compbio/static");
 }
 
 .gauss-row{
@@ -191,4 +202,8 @@ body{
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   min-height: 70px;
+}
+
+.instructionsLink{
+	color: white;
 }
