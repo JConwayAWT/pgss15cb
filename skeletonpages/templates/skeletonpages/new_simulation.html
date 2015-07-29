@@ -123,7 +123,21 @@
       .always(function() {
         console.log("complete");
       });
+
+
+      function start_pinging(){
+        setInterval(function(){
+          $.ajax({
+            url: '/skeletonpages/keep_alive/',
+          })
+          .success(function(data) {
+            console.log( data );
+          });
+          
+        }, 15*1000)          
+      }
       
+      start_pinging();
 
     });
 

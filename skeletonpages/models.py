@@ -17,11 +17,10 @@ class DemoObject(models.Model):
   def __unicode__(self):
     return "{}".format(self.object_name or self.object_description or "N/A")
 
+def upload_path(self, filename):
+  return strftime("%Y/%m/%d/%H/%M/{}".format(filename))
+
 class AlgorithmRun(models.Model):
-  def upload_path(self, filename):
-    return strftime("%Y/%m/%d/%H/%M/{}".format(filename))
-
-
   name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
   description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
   input_file = models.FileField(upload_to = upload_path, null = True, blank = True)
