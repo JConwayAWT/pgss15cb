@@ -107,7 +107,7 @@ def create_simulation_ajax(request):
   print request.POST
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
-    file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
+    file_name = "./pgss15compbio/media/out_file_{}.csv".format( str(random())[2:] )
     out_file = File(open(file_name, "w+"))
     p = Parser.Parser()
     model = p.get_model(request.FILES['input_file'], out_file)
@@ -147,7 +147,7 @@ def create_simulation_ajax(request):
 def create_simulation(request):
   form = AlgorithmRunForm(request.POST, request.FILES)
   if form.is_valid():
-    file_name = "./pgss15compbio/media/out_file_{}.txt".format( str(random())[2:] )
+    file_name = "./pgss15compbio/media/out_file_{}.csv".format( str(random())[2:] )
     out_file = File(open(file_name, "w+"))
     p = Parser()
     model = p.get_model(request.FILES['input_file'], out_file)
@@ -194,7 +194,7 @@ def file_test(request):
     if request.method == 'POST':
         form = AlgorithmRunForm(request.POST, request.FILES)
         if form.is_valid():
-            out_file = File(open("./pgss15compbio/media/out_file.txt", "w+"))
+            out_file = File(open("./pgss15compbio/media/out_file.csv", "w+"))
             p = Parser()
             model = p.get_model(request.FILES['input_file'], out_file)
             model.iterate()
@@ -202,7 +202,7 @@ def file_test(request):
               output_file=out_file)
             new_algorithm_run.save()
             # Redirect to the document list after POST
-            h = HttpResponseRedirect("../../media/out_file.txt")
+            h = HttpResponseRedirect("../../media/out_file.csv")
 
             return h
             
