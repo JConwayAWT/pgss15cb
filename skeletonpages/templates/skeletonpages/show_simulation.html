@@ -1,6 +1,6 @@
 {% include "common/_header.html" %}
 
-<div class="jumbotron">
+<div class="jumbotron" onload="onLoad()">
   <div class="row">
     <div class="col-md-12">
       <div class="text-center">
@@ -68,9 +68,9 @@
       {% else %}
         <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
         <br>
-        {% endif %}
-      {% endfor %}
-    </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 <br><br>
