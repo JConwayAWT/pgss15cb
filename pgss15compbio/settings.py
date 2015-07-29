@@ -46,7 +46,9 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'accounts',
-    'storages'
+    'storages',
+    'djcelery',
+    'djkombu'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -56,7 +58,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ANONYMOUS_USER_ID = -1
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -164,6 +165,13 @@ AUTH_PROFILE_MODULE = 'skeletonpages.UserProfile'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+BROKER_URL = 'django://'
+CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+CELERY_TASK_SERIALIZER='json'
+CELERY_ACCEPT_CONTENT=['json']
+CELERY_TIMEZONE='America/New_York'
+CELERY_ENABLE_UTC=True
 
 if ON_HEROKU:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
