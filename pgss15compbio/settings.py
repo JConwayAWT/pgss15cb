@@ -173,7 +173,7 @@ CELERY_ACCEPT_CONTENT=['json']
 CELERY_TIMEZONE='America/New_York'
 CELERY_ENABLE_UTC=True
 
-if ON_HEROKU:
+if True:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_KEY")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET")
