@@ -236,3 +236,27 @@ body{
 .new-simulation-description {
 	color: white;
 }
+
+.status{
+  font-size: 80px;
+  font-weight: bolder;
+}
+
+.status-cols{
+  color: white;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+
+.submitted-text{
+  font-size: 18px;
+  font-weight: 100;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.top-line{
+  font-weight: bolder;
+  font-size: 30px;
+}
