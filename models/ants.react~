@@ -5,8 +5,8 @@
 #   Name:Number
 #   Only input integer values as values
     
-    A: 100
-    B: 150
+    A: 1000
+    B: 450
     AB: 0
     ABB: 0
     ABBB: 0
