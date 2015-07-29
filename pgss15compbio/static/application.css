@@ -128,7 +128,7 @@ body{
 }
 
 .black-overlay-2 {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 0;
   left: 0;
@@ -140,11 +140,7 @@ body{
 	font-size: 50px;
 	font-weight: bolder;
 	padding: 50px;
-<<<<<<< HEAD
-	letter-spacing: 20px;
-=======
 	background-image:url("http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg");
->>>>>>> a096cf3be621e99c87d47a15ce00443f31283a80
 }
 
 .gauss-row{
