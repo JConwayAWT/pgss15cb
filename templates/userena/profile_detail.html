@@ -37,14 +37,15 @@
         <!-- <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" /> -->
     </div>
   </div>
-  <div class="row">
+  <br>
+  <div class="row" style="margin-left: 7.5%">
     <div class="col-md-5 col-md-offset-1">
         <div class="my-profile" style="padding-top: 15px;">
           My Simulations
         </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-left: 7.5%">
     <div class="col-md-5 col-md-offset-1">
       <div class="text-left">
         <a href="/skeletonpages/simulations/new/">
@@ -56,7 +57,7 @@
     </div>
   </div>
 </div>
-<br>
+<br><br>
 
 <div class="col-lg-10 col-lg-offset-1">
 {% for run in profile.algorithm_runs.all %}
@@ -67,7 +68,17 @@
       <div class="run-container">
         <div class="run-top-portion">
           <div class="run-name text-center">
-            <a href="/skeletonpages/simulations/{{run.id}}/show/" class="run-name"> {{ run.name }}</a>
+            {% if run.status == "COMPLETE" %}
+              <span class="glyphicon glyphicon-ok" class="run-name" style="position: relative; float: left; color: green; padding-left: 5px; font-size: 13px;" title="This simulation has completed processing"></span>
+            {% else %}
+              <span class="glyphicon glyphicon-refresh" class="run-name" style="position: relative; float: left; color: gray; padding-left: 5px; font-size: 13px;" title="This simulation is still processing.  Check back soon!"></span>
+            {% endif %}
+
+            {% if run.status == "COMPLETE" %}
+              <a href="/skeletonpages/simulations/{{run.id}}/show/" class="run-name"> {{ run.name }}</a>
+            {% else %}
+              <div class="run-name"> {{ run.name }}</div>
+            {% endif %}
             <a href="/skeletonpages/simulations/{{run.id}}/delete/" class="run-name" style="position:relative;float:right;color:red;padding-right:5px;font-size:13px"> X</a>
           </div>
         </div>

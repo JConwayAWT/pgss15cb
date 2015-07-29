@@ -21,6 +21,9 @@ def upload_path(self, filename):
   return strftime("%Y/%m/%d/%H/%M/{}".format(filename))
 
 class AlgorithmRun(models.Model):
+  # status should be "PROCESSING" or "COMPLETE"
+  status = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Status")
+  
   name = models.CharField(max_length = 255, null = True, blank = True, verbose_name = "Name")
   description = models.CharField(max_length = 2048, null = True, blank = True, verbose_name = "Description")
   input_file = models.FileField(upload_to = upload_path, null = True, blank = True)

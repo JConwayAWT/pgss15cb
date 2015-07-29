@@ -3,6 +3,7 @@ import random as rng
 import math
 import csv
 import os
+from time import time
 
 class Model(object):
 
@@ -40,8 +41,12 @@ class Model(object):
         fileWriter.writerow(["Time"] + reagentNames)
         
         i = 0
-        while time < self.num_iterations:
+        clock_start_time = time()
+        clock_end_time = time()
 
+
+        while (time < self.num_iterations) and (clock_end_time - clock_start_time < 300):
+            clock_end_time = time()
             i += 1
             sumProp = 0
             propen = []
