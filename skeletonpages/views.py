@@ -116,7 +116,7 @@ def create_simulation_ajax(request):
     request.user.userprofile.algorithm_runs.add(new_algorithm_run)
     request.user.userprofile.save()
 
-    # finish_iteration.delay(new_algorithm_run.pk)
+    finish_iteration.delay(new_algorithm_run.pk)
 
     context = {'simulation': new_algorithm_run}
 
