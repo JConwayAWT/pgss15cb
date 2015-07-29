@@ -1,5 +1,5 @@
 [Iterations]
-#   Number of iterations
+#   Simulation time
     1000
 [Reagents]
 #   Name:Number
