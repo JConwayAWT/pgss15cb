@@ -77,7 +77,7 @@
             {% if run.status == "COMPLETE" %}
               <a href="/skeletonpages/simulations/{{run.id}}/show/" class="run-name"> {{ run.name }}</a>
             {% else %}
-              <div class="run-name"> {{ run.name }}</div>
+              {{ run.name }}
             {% endif %}
             <a href="/skeletonpages/simulations/{{run.id}}/delete/" class="run-name" style="position:relative;float:right;color:red;padding-right:5px;font-size:13px"> X</a>
           </div>

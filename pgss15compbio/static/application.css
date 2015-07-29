@@ -140,12 +140,7 @@ body{
 	font-size: 50px;
 	font-weight: bolder;
 	padding: 50px;
-<<<<<<< HEAD
-	letter-spacing: 20px;
-	background-image:url("material_background2.png");
-=======
 	background-image:url("http://4.bp.blogspot.com/-ci8zjNrp50I/U_yCxyehuzI/AAAAAAAADX4/uiAIDRcpUB4/s1600/ahagzjsozh.jpg");
->>>>>>> c7eb2c58a1c95348150dc716a43ff439886d4439
 }
 
 .gauss-row{
@@ -242,10 +237,9 @@ body{
 	color: white;
 }
 
-<<<<<<< HEAD
 .hidden {
 	display: none;
-=======
+}
 .status{
   font-size: 80px;
   font-weight: bolder;
@@ -268,5 +262,4 @@ body{
 .top-line{
   font-weight: bolder;
   font-size: 30px;
->>>>>>> c7eb2c58a1c95348150dc716a43ff439886d4439
 }
