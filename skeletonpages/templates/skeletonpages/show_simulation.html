@@ -45,16 +45,16 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3 col-md-offset-3">
+  <div class="col-md-3 col-md-offset-3" style="padding-left: 7.5%">
     <h4> Select X Axis Variable:</h4>
-    <div class="radio" style="line-height:22px;">
+    <div class="radio" style="line-height:22px; padding-left: 9%">
     {% for name in variable_names %}
-        <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}"> {{name}}
+        <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}" sytle="padding-left: 7.5%"> {{name}}
         <br>
     {% endfor %}
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3" style="padding-left: 8%">
     <h4> Select Y Axis Variable:</h4>
     {% for name in variable_names %}
         <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
@@ -84,15 +84,7 @@
   </div>
 </div>
 
-<br><br>
-
-<div class="row gauss-row">
-  <div class="col-md-12">
-    <div class="text-center gauss gauss-jumbotron" style="color:white;">
-      GAUSS
-    </div>
-  </div>
-</div>
+<br>
 
 <script>
 

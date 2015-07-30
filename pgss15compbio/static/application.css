@@ -48,9 +48,9 @@ a{
 
 .navbar {
 	padding: 0px;
-	-webkit-box-shadow: 0px 10px 82px 0px rgba(0,0,0,0.55);
--moz-box-shadow: 0px 10px 82px 0px rgba(0,0,0,0.55);
-box-shadow: 0px 10px 82px 0px rgba(0,0,0,0.55);
+	-webkit-box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
+-moz-box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
+box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
 }
 
 #full-content{
