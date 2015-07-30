@@ -71,13 +71,7 @@
 
 <br><br><br>
 
-<div class="row gauss-row">
-  <div class="col-md-12">
-    <div class="text-center gauss gauss-jumbotron" style="color:white;">
-      GAUSS
-    </div>
-  </div>
-</div>
+
 
 
 {% include "common/_footer.html" %}
@@ -89,6 +83,8 @@
     $("#myAlert").hide();
     $("#successAlert").hide();
     $("#submitted").click(function(){
+      $(".before-processing").toggle();
+      $(".while-processing").toggle();
       var file = $("#id_input_file").prop("files")[0];
       var name = $("#simulation_name").val();
       var desc = $("#simulation_description").val();

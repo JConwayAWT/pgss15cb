@@ -63,10 +63,10 @@
     <h4> Select Y Axis Variable:</h4>
     {% for name in variable_names %}
       {% if forloop.first %}
-        <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
+        <input type="checkbox" id="{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
         <br>
       {% else %}
-        <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
+        <input type="checkbox" id="{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
         <br>
       {% endif %}
     {% endfor %}
@@ -76,7 +76,7 @@
 <br><br>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-2">
     <div class="text-center">
       <div id="myChart"></div>
     </div>
@@ -118,8 +118,10 @@
       }
     }
 
-    xVal = keys[keys.length-2]
-    yVal = keys[keys.length-1]
+    var xVal = "Time"
+    console.log("xVal: " + xVal)
+    var yVal = keys[keys.length-1]
+    console.log("yVal: " + yVal)
 
     var data = [{
       x: window.scireact.simulation_values[xVal],
@@ -163,7 +165,7 @@
     var notSelected = []
     for (var i=0; i<checkboxes.length; i++) {
       if (checkboxes[i].checked)
-        Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal] });
+        Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[checkboxes[i].id] });
     }    
 
     $(".axis-checkbox-x").change(function(){
@@ -208,10 +210,11 @@
       if ($(this).prop("checked")) {
         var newY = $(this).data().varkey;
 
-        if (keys.indexOf(newY) != -1)
-          yVal = newY;
+        if (keys.indexOf(newY) != -1) {
+          Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[newY] });
+        }
 
-        Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal] });
+        
       }
       else {
         for (var i=0; i<selected.length+1; i++) {
@@ -221,10 +224,11 @@
         for (var j=0; j<selected.length; j++) {
           var newY = $(selected[j]).data().varkey;
 
-          if (keys.indexOf(newY) != -1)
-            yVal = newY;
+          if (keys.indexOf(newY) != -1) {
+            Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[newVal], 'name': newVal});
+          }
 
-          Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal], 'name': yVal});
+
         }
 
       }
