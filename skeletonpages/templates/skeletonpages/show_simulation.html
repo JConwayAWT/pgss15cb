@@ -326,21 +326,26 @@
           }
         }
       }
-    })
+    });
+
+    function sortNumber(a, b){
+      return a - b;
+    }
 
     $("#uncheck-all-click").click(function(){
 
       len = $(".axis-checkbox-y").length;
       indexes_to_delete = []
+      var chart = $("#myChart")[0]
+
       for(var i = 0; i < len; i++)
       {
-        el = $($(".axis-checkbox-y")[i])
+        el = $($(".axis-checkbox-y")[i]);
+
         if ( el.is(":checked") )
         {
           el.prop("checked", false)
           var variable = el.data().varkey;
-          var chart = $("#myChart")[0]
-          var index_to_delete = -1;
           for(var k = 0; k < chart.data.length; k++ ){
             if ( chart.data[k].name == variable ){
               indexes_to_delete.push(k);
@@ -350,7 +355,12 @@
         }
       }
       console.log(indexes_to_delete)
+      indexes_to_delete.sort(sortNumber);
       Plotly.deleteTraces(chart, indexes_to_delete);
+
+      while( chart.data.length > 0 ){
+        Plotly.deleteTraces(chart, 0);
+      }
     });
 
   })
