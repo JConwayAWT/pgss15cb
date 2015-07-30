@@ -1,6 +1,6 @@
 {% include "common/_header.html" %}
 
-<div class="jumbotron" onload="onLoad()">
+<div class="jumbotron">
   <div class="row">
     <div class="col-md-12">
       <div class="text-center">
@@ -209,28 +209,23 @@
 
     $(".axis-checkbox-y").click(function(){
 
-      // the goal is to delete ALL the traces
-      // and then add back all the traces with the
-      // current x variable and every possible y variable
-
-
-      // get rid of all the other traces
-      var chart = document.getElementById("myChart");
-      if( chart.data.length > 0 ){
-        var range = createNumberArray(-1 * chart.data.length, -1)
-        Plotly.deleteTraces(chart, range);
-      }
-
-      // make new traces for every checked box
-      var current_x_name = $(".axis-checkbox-x:checked").data().varkey;
-
-      for( var i = 0; i < $(".axis-checkbox-y").length; i++ ){
-        var element = $($(".axis-checkbox-y")[i]);
-        if( element.is(":checked") == true )
-        {
-          variable = element.data().varkey;
-          add_trace_for_xname_and_yname(current_x_name, variable);
+      if( $(this).is(":checked") == false ){
+        // delete the thing
+        var variable = $(this).data().varkey;
+        var chart = $("#myChart")[0]
+        var index_to_delete = -1;
+        for(var i = 0; i < chart.data.length; i++ ){
+          if ( chart.data[i].name == variable ){
+            index_to_delete = i;
+          }
         }
+
+        Plotly.deleteTraces(chart, index_to_delete);
+      }
+      else{
+        var variable = $(this).data().varkey;
+        var current_x_name = $(".axis-checkbox-x:checked").data().varkey;
+        add_trace_for_xname_and_yname(current_x_name, variable);
       }
 
     });
