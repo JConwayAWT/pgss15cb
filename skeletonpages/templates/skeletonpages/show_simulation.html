@@ -60,6 +60,10 @@
         <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
         <br>
     {% endfor %}
+    <div class="uncheck-all">
+      <a class="uncheck-all-link" id="uncheck-all-click">(Uncheck all)</a> &nbsp;
+      <a class="uncheck-all-link" id="check-all-click">(Check all)</a>
+    </div>
   </div>
 </div>
 
@@ -306,6 +310,48 @@
       };
       Plotly.plot(myChart3d, data3d, layout3d);
     }
+
+    $("#check-all-click").click(function(){
+      len = $(".axis-checkbox-x").length;
+      for( var i = 0; i < len; i++){
+        el = $($(".axis-checkbox-y")[i])
+        if( el.is(":checked") == false)
+        {
+          var variable = el.data().varkey;
+          if( variable != "Time" )
+          {
+            el.prop("checked", true);
+            var current_x_name = $(".axis-checkbox-x:checked").data().varkey;
+            add_trace_for_xname_and_yname(current_x_name, variable);
+          }
+        }
+      }
+    })
+
+    $("#uncheck-all-click").click(function(){
+
+      len = $(".axis-checkbox-y").length;
+      indexes_to_delete = []
+      for(var i = 0; i < len; i++)
+      {
+        el = $($(".axis-checkbox-y")[i])
+        if ( el.is(":checked") )
+        {
+          el.prop("checked", false)
+          var variable = el.data().varkey;
+          var chart = $("#myChart")[0]
+          var index_to_delete = -1;
+          for(var k = 0; k < chart.data.length; k++ ){
+            if ( chart.data[k].name == variable ){
+              indexes_to_delete.push(k);
+            }
+          }
+
+        }
+      }
+      console.log(indexes_to_delete)
+      Plotly.deleteTraces(chart, indexes_to_delete);
+    });
 
   })
 

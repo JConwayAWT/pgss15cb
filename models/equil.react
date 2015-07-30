@@ -1,0 +1,23 @@
+[Iterations]
+#   Simulation time
+    1
+[Reagents]
+#   Name:Number
+#   Only input integer values as values
+    A:6.022e5
+    B:6.022e5
+    C:0
+[Reactions]
+#   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k
+#   If nothing created or used in reaction, then use $ sign
+#   Only input integer values as coefficients
+    A + B -> C | 3.321e-6
+	C -> A + B | 2e2
+
+[Output_Frequency]
+#   (int) Logging frequency in iterations
+    1000
+[RNG_Seed]
+#   (int) Random seed
+#   use r character for random seed
+    1000
