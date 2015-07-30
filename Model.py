@@ -73,8 +73,10 @@ class Model(object):
                 subsum += n
                 if subsum >= thres:
                     break
+            
+            self.reactions[nextReact].reaction_update()
+            
             if i % 100 == 0:
-                self.reactions[nextReact].reaction_update()
                 reagentCounts = []
                 for r in reagents:
                     reagentCounts.append(r.count)
