@@ -49,26 +49,16 @@
     <h4> Select X Axis Variable:</h4>
     <div class="radio" style="line-height:22px;">
     {% for name in variable_names %}
-      {% if forloop.first %}
-        <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" checked data-varkey="{{name}}"> {{name}}
-        <br>
-      {% else %}
         <input type="radio" name="optionsRadiosX" id="checkbox-x-{{name}}" class="axis-checkbox-x" data-varkey="{{name}}"> {{name}}
         <br>
-      {% endif %}
     {% endfor %}
     </div>
   </div>
   <div class="col-md-3">
     <h4> Select Y Axis Variable:</h4>
     {% for name in variable_names %}
-      {% if forloop.first %}
         <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" data-varkey="{{name}}"> {{name}}
         <br>
-      {% else %}
-        <input type="checkbox" id="checkbox-y-{{name}}" class="axis-checkbox-y" checked data-varkey="{{name}}"> {{name}}
-        <br>
-      {% endif %}
     {% endfor %}
   </div>
 </div>
@@ -76,7 +66,7 @@
 <br><br>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <div class="text-center">
       <div id="myChart"></div>
     </div>
@@ -105,80 +95,199 @@
 </div>
 
 <script>
+
   $(document).ready(function(){
-    var mychart = document.getElementById("myChart");
-    var mychart3d = document.getElementById("myChart3d");
+    // get the chart element
+    var chart = document.getElementById("myChart");
+
+    // initialize the window variable
     window.scireact = {}
     window.scireact.simulation_values = {{ simulation_values }};
 
-    var keys = []
-    for (key in window.scireact.simulation_values) {
-      if (window.scireact.simulation_values.hasOwnProperty(key)) {
-        keys.push(key);
+    // shove the keys into a list
+    window.scireact.keys = []
+    for (key in window.scireact.simulation_values){
+      if (window.scireact.simulation_values.hasOwnProperty(key)){
+        window.scireact.keys.push(key);
       }
     }
 
-    xVal = keys[keys.length-2]
-    yVal = keys[keys.length-1]
+    // the starting x variable will always be time
+    var x_variable_name = "Time";
 
-    var data = [{
-      x: window.scireact.simulation_values[xVal],
-      y: window.scireact.simulation_values[yVal],
+    // the first y variable will be just one of the non-time vars
+    var first_y_variable_name = window.scireact.keys[0];
+
+    // if you accidentally picked time, pick the first non-time one
+    if ( first_y_variable_name == "Time" ){
+      first_y_variable_name = window.scireact.keys[1];
+    }
+
+    // set the x, y, and plot type
+    var trace1 = [{
+      x: window.scireact.simulation_values[x_variable_name],
+      y: window.scireact.simulation_values[first_y_variable_name],
+      name: first_y_variable_name,
       type: "scatter"
     }]
+
+    // set the layout
     var layout = {
-      title: "{{ simulation.name }}", 
+      showlegend: true,
+      legend: {
+        x: 1,
+        y: 1
+      },
+      title: "{{ simulation.name }}",
       xaxis: {
-        title: xVal, 
+        title: x_variable_name,
         titlefont: {
-          family: "Courier New, monospace", 
+          family: "Courier New, monospace",
           size: 18,
           color: "#7f7f7f"
         },
         autorange: true,
         zeroline: true
-      }, 
+      },
       yaxis: {
-        title: "Number", 
+        title: "Count",
         titlefont: {
-          family: "Courier New, monospace", 
-          size: 18, 
+          family: "Courier New, monospace",
+          size: 18,
           color: "#7f7f7f"
         },
         autorange: true,
         zeroline: true
       }
     };
-    Plotly.plot(mychart, [], layout);
-    $(".modebar-btn[data-title='Autoscale']")[0].click()
 
+    // plot it!
+    Plotly.plot(chart, trace1, layout);
+
+    // autoscale it by clicking (lol)
+    $(".modebar-btn[data-title='Autoscale']")[0].click();
+
+    // hide the 3D thing if necessary
     var checkboxes = $( ":checkbox" )
-
-    if (checkboxes.length > 3) {
-
-      $("#three-d").addClass('hidden');
+    if( checkboxes.length != 3){
+      $("#three-d").hide();
     }
 
-    var selected = []
-    var notSelected = []
-    for (var i=0; i<checkboxes.length; i++) {
-      if (checkboxes[i].checked)
-        Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal] });
-    }    
+    // find the time radio button and click it ^.^
+    $(".axis-checkbox-x[data-varkey='Time']").click();
 
-    $(".axis-checkbox-x").change(function(){
-      var newX = $(this).data().varkey;
+    // find the y checkbox and click it ^.^
+    $(".axis-checkbox-y[data-varkey='" + first_y_variable_name +"']").click();
 
-      if (keys.indexOf(newX) != -1)
-        xVal = newX
+    add_variables_aside_from_time_to_y()
 
-      mychart.data[0].x = window.scireact.simulation_values[xVal];
-      Plotly.redraw(mychart);
+    function add_variables_aside_from_time_to_y(){
+      for( var i = 0; i < $(".axis-checkbox-y").length; i++ ){
+        var element = $($(".axis-checkbox-y")[i]);
+        if( element.data().varkey != "Time" && element.is(":checked") == false )
+        {
+          variable = element.data().varkey;
+          add_trace_for_xname_and_yname(x_variable_name, variable);
+          element.prop("checked", true);
+        }
+      }
+    }
 
-      var update = {
-        title: "{{ simulation.name }}", 
+    function add_trace_for_xname_and_yname( x_name, y_name ){
+      var chart = document.getElementById("myChart");
+      Plotly.addTraces(chart, 
+        {
+          x: window.scireact.simulation_values[x_name], 
+          y: window.scireact.simulation_values[y_name],
+          name: y_name,
+          type: "scatter"
+        }
+      );
+    }
+
+    function createNumberArray(lowEnd, highEnd) {
+        var start = lowEnd;
+        var array = [start];
+        while (start < highEnd) {
+            start++;
+            array.push(start);
+        }
+        return array
+    } 
+
+    $(".axis-checkbox-y").click(function(){
+
+      // the goal is to delete ALL the traces
+      // and then add back all the traces with the
+      // current x variable and every possible y variable
+
+
+      // get rid of all the other traces
+      var chart = document.getElementById("myChart");
+      if( chart.data.length > 0 ){
+        var range = createNumberArray(-1 * chart.data.length, -1)
+        Plotly.deleteTraces(chart, range);
+      }
+
+      // make new traces for every checked box
+      var current_x_name = $(".axis-checkbox-x:checked").data().varkey;
+
+      for( var i = 0; i < $(".axis-checkbox-y").length; i++ ){
+        var element = $($(".axis-checkbox-y")[i]);
+        if( element.is(":checked") == true )
+        {
+          variable = element.data().varkey;
+          add_trace_for_xname_and_yname(current_x_name, variable);
+        }
+      }
+
+    });
+
+    $(".axis-checkbox-x").click(function(){
+
+      // the goal is to delete ALL the traces
+      // and then add back all the traces with the
+      // current x variable and every possible y variable
+
+
+      // get rid of all the other traces
+      var chart = document.getElementById("myChart");
+      var range = createNumberArray(-1 * chart.data.length, -1)
+      Plotly.deleteTraces(chart, range);
+
+      // make new traces for every checked box
+      var current_x_name = $(".axis-checkbox-x:checked").data().varkey;
+
+      console.log(current_x_name);
+
+      for( var i = 0; i < $(".axis-checkbox-y").length; i++ ){
+        var element = $($(".axis-checkbox-y")[i]);
+        if( element.is(":checked") == true )
+        {
+          variable = element.data().varkey;
+          add_trace_for_xname_and_yname(current_x_name, variable);
+        }
+      }
+
+      var update = { 'xaxis.title': current_x_name }
+      Plotly.relayout(chart, update);
+
+    });
+
+    var keys = window.scireact.keys;    
+
+    if( keys.length == 3){
+
+      var data3d = [{
+        x: window.scireact.simulation_values[keys[0]],
+        y: window.scireact.simulation_values[keys[1]],
+        z: window.scireact.simulation_values[keys[2]],
+        type: "scatter3d"
+      }];
+      var layout3d = {
+        title: keys[0] + " vs " + keys[1] + " over " + keys[2], 
         xaxis: {
-          title: xVal, 
+          title: keys[0], 
           titlefont: {
             family: "Courier New, monospace", 
             size: 18,
@@ -186,53 +295,19 @@
           },
           autorange: true,
           zeroline: true
-        }
-      }
-      Plotly.relayout(mychart, update)
-      $(".modebar-btn[data-title='Autoscale']")[0].click()
-
-    });
-
-    $(".axis-checkbox-y").change(function(){
-      var checkboxes = $( ":checkbox" )
-
-      var selected = []
-      var notSelected = []
-      for (var i=0; i<checkboxes.length; i++) {
-        if (checkboxes[i].checked)
-          selected.push(checkboxes[i])
-        else
-          notSelected.push(checkboxes[i])
-      }
-
-      if ($(this).prop("checked")) {
-        var newY = $(this).data().varkey;
-
-        if (keys.indexOf(newY) != -1)
-          yVal = newY;
-
-        Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal] });
-      }
-      else {
-        for (var i=0; i<selected.length+1; i++) {
-          Plotly.deleteTraces(mychart, 0);
-        }
-
-        for (var j=0; j<selected.length; j++) {
-          var newY = $(selected[j]).data().varkey;
-
-          if (keys.indexOf(newY) != -1)
-            yVal = newY;
-
-          Plotly.addTraces(mychart, {'y': window.scireact.simulation_values[yVal], 'name': yVal});
-        }
-
-      }
-
-      var update = {
-        title: "{{ simulation.name }}", 
-        xaxis: {
-          title: xVal,
+        },
+        yaxis: {
+          title: keys[1], 
+          titlefont: {
+            family: "Courier New, monospace", 
+            size: 18, 
+            color: "#7f7f7f"
+          },
+          autorange: true,
+          zeroline: true
+        },
+        zaxis: {
+          title: keys[2], 
           titlefont: {
             family: "Courier New, monospace", 
             size: 18, 
@@ -241,59 +316,11 @@
           autorange: true,
           zeroline: true
         }
-      }
-      Plotly.relayout(mychart, update)
-      $(".modebar-btn[data-title='Autoscale']")[0].click()
-    });
+      };
+      Plotly.plot(myChart3d, data3d, layout3d);
+    }
 
-    zVal = keys[0]
-    var data3d = [{
-      x: window.scireact.simulation_values[zVal],
-      y: window.scireact.simulation_values[xVal],
-      z: window.scireact.simulation_values[yVal],
-      type: "scatter3d"
-    }];
-    var layout3d = {
-      title: yVal + " vs " + zVal + " over " + xVal, 
-      xaxis: {
-        title: xVal, 
-        titlefont: {
-          family: "Courier New, monospace", 
-          size: 18,
-          color: "#7f7f7f"
-        },
-        autorange: true,
-        zeroline: true
-      },
-      yaxis: {
-        title: yVal, 
-        titlefont: {
-          family: "Courier New, monospace", 
-          size: 18, 
-          color: "#7f7f7f"
-        },
-        autorange: true,
-        zeroline: true
-      },
-      zaxis: {
-        title: zVal, 
-        titlefont: {
-          family: "Courier New, monospace", 
-          size: 18, 
-          color: "#7f7f7f"
-        },
-        autorange: true,
-        zeroline: true
-      }
-    };
-    Plotly.plot(myChart3d, data3d, layout3d);
-
-  });
-  
-  function onLoad() {
-    $(".axis-checkbox-y")[0].click();
-    $(".axis-checkbox-y")[0].click();
-  }
+  })
 
 </script>
 

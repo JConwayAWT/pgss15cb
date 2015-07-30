@@ -7,6 +7,8 @@
         <h1 style="font-size: 80px">New Simulation</h1>
         <div class="new-simulation-description">
           Please upload a file in GAUSS .react format.
+          <br>
+          Not sure what that looks like?  <a style="color: #F9B149; font-weight: bold; text-decoration: underline; cursor: pointer" data-target="#exampleModal" data-toggle="modal">Check our example!</a>
         </div>
       </div>
     </div>
@@ -180,3 +182,48 @@
   });
 
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Example .react file</h4>
+      </div>
+      <div class="modal-body">
+        #   Lines with a "#" at the beginning are comments<br>
+        [Iterations]<br>
+        #   Number of iterations<br>
+            &emsp;&emsp;100<br>
+        [Reagents]<br>
+        #   Name:Number<br>
+        #   The left side shouldn't have any spaces; the right side should be an integer<br>
+            &emsp;&emsp;R:1000<br>
+            &emsp;&emsp;W:2000<br>
+        [Reactions]<br>
+        #   (coeff 1)Name1 + (coeff 2)Name2 -> (coeff 3)Name3 | k<br>
+        #   If nothing created or used in reaction, then use $<br>
+        #   Only input integer values as coefficients<br>
+            &emsp;&emsp;1R -> 2R | 10<br>
+            &emsp;&emsp;1R + 1W -> 2W | 0.01<br>
+            &emsp;&emsp;1W -> $ | 10<br>
+        [Output_Reagents]<br>
+        #   Just one name per line<br>
+            &emsp;&emsp;R<br>
+            &emsp;&emsp;W<br>
+        [Output_Frequency]<br>
+        #   Logging frequency in iterations (must be a positive integer)<br>
+            &emsp;&emsp;10<br>
+        [RNG_Seed]<br>
+        #   Random seed<br>
+        #   use "r" character for random seed<br>
+            &emsp;&emsp;1000<br>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
