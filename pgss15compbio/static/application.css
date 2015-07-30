@@ -289,3 +289,26 @@ box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
   cursor: pointer;
   color: gray;
 }
+
+#full-wrapper{
+  min-height: 100%;
+}
+
+#full-header{
+
+}
+
+#full-content{
+}
+
+#full-footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
