@@ -10,6 +10,10 @@ body{
 	background-color: whitesmoke;
 }
 
+html, body{
+  height: 100%;
+}
+
 a{
 	color:#FFFFFF;
 }
@@ -292,6 +296,7 @@ box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
 
 #full-wrapper{
   min-height: 100%;
+  position: relative;
 }
 
 #full-header{
@@ -299,6 +304,7 @@ box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
 }
 
 #full-content{
+  padding-bottom: 100px;
 }
 
 #full-footer{
