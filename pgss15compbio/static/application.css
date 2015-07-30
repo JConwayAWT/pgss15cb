@@ -215,6 +215,12 @@ box-shadow: 0px 6px 13px 0px rgba(0,0,0,0.35);
   background-color: white;
 }
 
+.run-name-link{
+  font-size: 18px;
+  font-weight: bolder;
+  color: #337ab7;
+}
+
 .run-name{
   font-size: 18px;
   font-weight: bolder;
